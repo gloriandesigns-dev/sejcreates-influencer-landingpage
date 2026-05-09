@@ -3,30 +3,45 @@ import { motion } from 'framer-motion';
 
 const reelsData = [
   { 
-    title: "D2C strategy breakdowns", 
-    img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=600&auto=format&fit=crop",
-    video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+    title: "Content Strategy", 
+    video: "https://www.dropbox.com/scl/fi/6c4qowggrd5uklp20xgia/sejcurates_1773839488_3855338724758503494_71849440928.mp4?rlkey=8ir4pgaa5wipp7o2vzawvc632&st=hic0az2c&raw=1"
   },
   { 
-    title: "Consumer psychology", 
-    img: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=600&auto=format&fit=crop",
-    video: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
+    title: "Brand Storytelling", 
+    video: "https://www.dropbox.com/scl/fi/y77tnyj0c9aolxrosmeeh/sejcurates_1778075193_3891098317188389548_71849440928.mp4?rlkey=eedwe6z3zwqkc0cpyck3neuxx&st=l0q91m36&raw=1"
   },
   { 
-    title: "AI and internet culture", 
-    img: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=600&auto=format&fit=crop",
-    video: "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
+    title: "Consumer Psychology", 
+    video: "https://www.dropbox.com/scl/fi/hbsqx156dasbyvwpfbxq2/sejcurates_1777821481_3888723287213192739_71849440928.mp4?rlkey=xllcnyb8aai2tzzmkvm7unoh7&st=4jwnh4yk&raw=1"
   },
   { 
-    title: "Brand storytelling", 
-    img: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=600&auto=format&fit=crop",
-    video: "https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"
+    title: "D2C Breakdowns", 
+    video: "https://www.dropbox.com/scl/fi/0xz6da1w0qiniibqtmimy/sejcurates_1777466553_3885992340779237144_71849440928.mp4?rlkey=0c3yvhnugus2jpcmggvunk8b0&st=bzaenwgb&raw=1"
   },
   { 
-    title: "Marketing insights", 
-    img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop",
-    video: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    title: "Internet Culture", 
+    video: "https://www.dropbox.com/scl/fi/wdyw8avfrsxo38lg37348/sejcurates_1777381088_3885275268046657547_71849440928.mp4?rlkey=cepspt2w8wwcjdeomexbtl1u2&st=0yxkmu5i&raw=1"
   },
+  { 
+    title: "Marketing Insights", 
+    video: "https://www.dropbox.com/scl/fi/fj06viu1oponmf5bw1ezw/sejcurates_1777038242_3882399847680691407_71849440928.mp4?rlkey=knorpo13d8u8qou0jayh22clp&st=lzqnqdcc&raw=1"
+  },
+  { 
+    title: "Creator Economy", 
+    video: "https://www.dropbox.com/scl/fi/eof2snsyea2ybv7bzogwv/sejcurates_1777986433_3890349026798794637_71849440928.mp4?rlkey=56eh6sz8vudnp90y5n6w6mj85&st=q950adbp&raw=1"
+  },
+  { 
+    title: "Digital Ecosystems", 
+    video: "https://www.dropbox.com/scl/fi/v3t68ttmol2i8sa4rdnwg/sejcurates_1770212710_3825139871342134124_71849440928.mp4?rlkey=4mdg6fn7q8aso6jymqst7nmnn&st=d2dorznh&raw=1"
+  },
+  { 
+    title: "Modern Business", 
+    video: "https://www.dropbox.com/scl/fi/y0k1b7x9oxbzmkg3vheui/sejcurates_1759931266_3738891360318036890_71849440928.mp4?rlkey=2l9y2vv7xyurct98wrlu9g6kk&st=6upensne&raw=1"
+  },
+  { 
+    title: "Strategic Thinking", 
+    video: "https://www.dropbox.com/scl/fi/r582abu9d37e9ltb0eift/sejcurates_1778159040_3891800077154469281_71849440928.mp4?rlkey=pbvt92ge36xlx8lisu58zq09j&st=49yxmi91&raw=1"
+  }
 ];
 
 const ReelCard = ({ item }: { item: typeof reelsData[0] }) => {
@@ -35,11 +50,15 @@ const ReelCard = ({ item }: { item: typeof reelsData[0] }) => {
   const handleMouseEnter = () => {
     if (videoRef.current) {
       videoRef.current.muted = false;
+      videoRef.current.play().catch(() => {
+        // Silence the "interrupted by call to pause" error
+      });
     }
   };
 
   const handleMouseLeave = () => {
     if (videoRef.current) {
+      videoRef.current.pause();
       videoRef.current.muted = true;
     }
   };
@@ -53,8 +72,6 @@ const ReelCard = ({ item }: { item: typeof reelsData[0] }) => {
       <video 
         ref={videoRef}
         src={item.video}
-        poster={item.img}
-        autoPlay
         loop
         muted
         playsInline
@@ -111,7 +128,7 @@ const ReelsTicker = () => {
           animate={{ x: ["0%", "-50%"] }}
           transition={{ 
             ease: "linear", 
-            duration: 40, 
+            duration: 80, // Slower for 20 items
             repeat: Infinity,
           }}
           style={{ width: "max-content" }}

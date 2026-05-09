@@ -2,17 +2,15 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const brands = [
-  "Tata CLiQ Luxury",
-  "ICA Pidilite",
-  "Morgan Stanley",
-  "Dualite",
-  "London Business School",
-  "Bluence"
+  "https://www.dropbox.com/scl/fi/s7bvtjrzffpg2azd1lirz/kdn40mjy1froedjndns0.webp?rlkey=4ktj6yww79c6ukiuy5xsvb1qm&st=p1xhrz3n&raw=1",
+  "https://www.dropbox.com/scl/fi/m83cuxt4ppd2ejnt1z4k2/wbbkwsxrvvkzugkhbtod.webp?rlkey=6c6mchox7af3g7fuvxff2ew2e&st=x8zgaxrz&raw=1",
+  "https://www.dropbox.com/scl/fi/01ywh288t3bycseqsh6wo/gh59tas0eoaqbg9e5e3x.webp?rlkey=j38mp9cjj8kkdz6ivllrpjpjv&st=wo04q777&raw=1",
+  "https://www.dropbox.com/scl/fi/zikl77pbz5hcx5fyifxqy/e55awlzmu1unlsypbgka.webp?rlkey=vjsc9y5s2t8i48ks3u0unqpqw&st=pymt6cok&raw=1"
 ];
 
 const BrandsTicker = () => {
   // Duplicate for seamless infinite scroll
-  const tickerItems = [...brands, ...brands, ...brands];
+  const tickerItems = [...brands, ...brands, ...brands, ...brands];
 
   return (
     <section className="py-24 bg-primary overflow-hidden border-b border-borderSoft/50">
@@ -39,10 +37,10 @@ const BrandsTicker = () => {
 
         <motion.div 
           className="flex items-center gap-24 md:gap-40 px-12"
-          animate={{ x: ["0%", "-33.33%"] }}
+          animate={{ x: ["0%", "-50%"] }}
           transition={{ 
             ease: "linear", 
-            duration: 60, // Ultra slow continuous motion
+            duration: 45, // Increased speed slightly
             repeat: Infinity,
           }}
           style={{ width: "max-content" }}
@@ -50,12 +48,13 @@ const BrandsTicker = () => {
           {tickerItems.map((brand, idx) => (
             <div 
               key={idx} 
-              className="shrink-0 cursor-default group/logo relative"
+              className="shrink-0 cursor-default group/logo relative flex items-center justify-center"
             >
-              {/* Using elegant typography to represent logos cleanly */}
-              <span className="text-3xl md:text-4xl lg:text-5xl font-display font-light text-accentPink/40 uppercase tracking-widest group-hover/logo:text-accentPink transition-all duration-1000 relative z-10">
-                {brand}
-              </span>
+              <img 
+                src={brand} 
+                alt="Brand Logo" 
+                className="h-12 md:h-16 w-auto object-contain opacity-40 group-hover/logo:opacity-100 transition-all duration-1000 relative z-10" 
+              />
               {/* Subtle hover glow */}
               <div className="absolute inset-0 bg-accentLime/40 blur-2xl rounded-full opacity-0 group-hover/logo:opacity-100 transition-opacity duration-1000 -z-0 scale-150"></div>
             </div>

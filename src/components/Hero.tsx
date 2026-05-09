@@ -1,6 +1,97 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useEffect, useState } from 'react';
+import { motion, useInView, animate } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+
+const AnimatedNumber = ({ value, prefix = "", suffix = "" }: { value: number, prefix?: string, suffix?: string }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
+
+  useEffect(() => {
+    if (inView && ref.current) {
+      const controls = animate(0, value, {
+        duration: 2.5,
+        ease: [0.25, 1, 0.5, 1],
+        onUpdate(v) {
+          if (ref.current) {
+            ref.current.textContent = `${prefix}${Math.round(v)}${suffix}`;
+          }
+        }
+      });
+      return () => controls.stop();
+    }
+  }, [inView, value, prefix, suffix]);
+
+  return <span ref={ref}>{prefix}0{suffix}</span>;
+};
+
+const ScrambleText = ({ text }: { text: string }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+  useEffect(() => {
+    if (inView && ref.current) {
+      let iteration = 0;
+      const interval = setInterval(() => {
+        if (ref.current) {
+          ref.current.textContent = text
+            .split("")
+            .map((letter, index) => {
+              if (index < iteration) {
+                return text[index];
+              }
+              return letters[Math.floor(Math.random() * 26)];
+            })
+            .join("");
+        }
+        if (iteration >= text.length) {
+          clearInterval(interval);
+        }
+        iteration += 1 / 4;
+      }, 40);
+      return () => clearInterval(interval);
+    }
+  }, [inView, text]);
+
+  return <span ref={ref}>{text}</span>;
+};
+
+const TypewriterHeading = () => {
+  const [text, setText] = useState("");
+  const fullText = "Hello";
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (inView) {
+      let i = 0;
+      // Small delay before typing starts to sync with the section reveal
+      const timeout = setTimeout(() => {
+        const timer = setInterval(() => {
+          setText(fullText.slice(0, i + 1));
+          i++;
+          if (i >= fullText.length) {
+            clearInterval(timer);
+          }
+        }, 200);
+        return () => clearInterval(timer);
+      }, 600);
+      return () => clearTimeout(timeout);
+    }
+  }, [inView]);
+
+  return (
+    <h1 ref={ref} className="text-[120px] sm:text-[160px] md:text-[200px] lg:text-[240px] leading-[0.85] font-display font-light tracking-tighter mb-8 -ml-2 text-accentPink">
+      {text}
+      <motion.span
+        animate={{ opacity: [1, 0] }}
+        transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
+      >
+        _
+      </motion.span>
+    </h1>
+  );
+};
 
 const Hero = () => {
   // Ultra-slow cinematic entry animations
@@ -88,26 +179,29 @@ const Hero = () => {
           {/* Stats Row */}
           <motion.div variants={textRiseVariants} className="flex gap-12 md:gap-16 mb-12 md:mb-20">
             <div>
-              <p className="text-3xl md:text-4xl font-display font-light mb-2 tracking-tight text-textMain">+27k</p>
+              <p className="text-3xl md:text-4xl font-display font-light mb-2 tracking-tight text-textMain">
+                <AnimatedNumber value={27} prefix="+" suffix="k" />
+              </p>
               <p className="text-[9px] text-textMuted uppercase tracking-[0.2em]">Followers</p>
             </div>
             <div>
-              <p className="text-3xl md:text-4xl font-display font-light mb-2 tracking-tight text-textMain">+5</p>
+              <p className="text-3xl md:text-4xl font-display font-light mb-2 tracking-tight text-textMain">
+                <AnimatedNumber value={5} prefix="+" />
+              </p>
               <p className="text-[9px] text-textMuted uppercase tracking-[0.2em]">Brands</p>
             </div>
             <div>
-              <p className="text-3xl md:text-4xl font-display font-light mb-2 tracking-tight text-textMain">LBS</p>
+              <p className="text-3xl md:text-4xl font-display font-light mb-2 tracking-tight text-textMain">
+                <ScrambleText text="LBS" />
+              </p>
               <p className="text-[9px] text-textMuted uppercase tracking-[0.2em]">'24</p>
             </div>
           </motion.div>
 
           {/* Hero Heading */}
-          <motion.h1 
-            variants={textRiseVariants} 
-            className="text-[120px] sm:text-[160px] md:text-[200px] lg:text-[240px] leading-[0.85] font-display font-light tracking-tighter mb-8 -ml-2 text-accentPink"
-          >
-            Hello
-          </motion.h1>
+          <motion.div variants={textRiseVariants}>
+            <TypewriterHeading />
+          </motion.div>
           
           {/* Subtext */}
           <motion.div variants={textRiseVariants} className="flex items-start gap-4 max-w-[420px]">
@@ -142,19 +236,15 @@ const Hero = () => {
       </div>
 
       {/* Right Visual Block (48%) */}
-      <div className="w-full lg:w-[48%] relative lg:absolute lg:right-0 lg:top-0 h-[60vh] lg:h-screen z-0 overflow-hidden after:absolute after:inset-0 after:bg-accentPink/10 after:mix-blend-overlay after:pointer-events-none">
-        {/* Subtle gradient overlay to blend the image into the background slightly */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary via-transparent to-transparent z-10 hidden lg:block w-32"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent z-10 lg:hidden h-32 bottom-0 top-auto"></div>
-        
+      <div className="w-full lg:w-[48%] relative lg:absolute lg:right-0 lg:top-0 h-[60vh] lg:h-screen z-0 overflow-hidden flex items-end justify-end">
         <motion.img 
           initial={{ scale: 1.1, filter: 'blur(20px)', opacity: 0 }}
           animate={{ scale: 1, filter: 'blur(0px)', opacity: 1 }}
           transition={{ duration: 2.8, ease: [0.25, 1, 0.5, 1] }}
           whileHover={{ scale: 1.02, transition: { duration: 8, ease: "linear" } }}
-          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200&auto=format&fit=crop" 
+          src="https://www.dropbox.com/scl/fi/h9zbss8aafcdf0w40lgjc/mlgyopbirnyidourb9pm.webp?rlkey=9os4k9en4v6o1wwpvs5iqj019&st=g1llypth&raw=1" 
           alt="Sejcurates Portrait" 
-          className="absolute inset-0 w-full h-full object-cover object-top lg:object-center"
+          className="w-[85%] lg:w-[90%] h-auto max-h-[90vh] object-contain object-bottom absolute bottom-0 right-0"
         />
       </div>
 

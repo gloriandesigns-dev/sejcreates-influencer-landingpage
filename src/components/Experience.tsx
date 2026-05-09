@@ -146,13 +146,13 @@ const Experience = () => {
                 >
                   <div className="lg:col-span-7 grid grid-cols-3 gap-4">
                     <div className="h-32 md:h-48 rounded-xl overflow-hidden group/img">
-                      <img src="https://images.unsplash.com/photo-1618220179428-22790b46a0eb?q=80&w=600&auto=format&fit=crop" alt="Workspace" className="w-full h-full object-cover group-hover/img:scale-105 transition-all duration-1000" />
+                      <img src="https://www.dropbox.com/scl/fi/u54vadiycc9m8hid8vk09/bykval8nfzlcykqpavzr.webp?rlkey=1f4zwej6ggf376rnwf4xtrsq1&st=853k0m1b&raw=1" alt="Workspace" className="w-full h-full object-cover group-hover/img:scale-105 transition-all duration-1000" />
                     </div>
                     <div className="h-32 md:h-48 rounded-xl overflow-hidden group/img">
-                      <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=600&auto=format&fit=crop" alt="Abstract" className="w-full h-full object-cover group-hover/img:scale-105 transition-all duration-1000" />
+                      <img src="https://www.dropbox.com/scl/fi/62wpayh4qnd8jzhl25u0b/vsdohmzwfiotlsvf4ofh.webp?rlkey=32cnlwjiusl54fd4tqcbn7yzc&st=a87arzli&raw=1" alt="Abstract" className="w-full h-full object-cover group-hover/img:scale-105 transition-all duration-1000" />
                     </div>
                     <div className="h-32 md:h-48 rounded-xl overflow-hidden group/img">
-                      <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=600&auto=format&fit=crop" alt="Still life" className="w-full h-full object-cover group-hover/img:scale-105 transition-all duration-1000" />
+                      <img src="https://www.dropbox.com/scl/fi/xrg51lu2p2pqp4z9qmt5h/uuncyclbaxrdpqgfsdjp.webp?rlkey=ut6rr61r3ydi1uw3uve1wu6ui&st=wud1c4rc&raw=1" alt="Still life" className="w-full h-full object-cover group-hover/img:scale-105 transition-all duration-1000" />
                     </div>
                   </div>
                   <div className="lg:col-span-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">

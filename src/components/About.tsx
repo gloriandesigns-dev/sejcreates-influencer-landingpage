@@ -3,6 +3,12 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight, Plus } from 'lucide-react';
 
 const About = () => {
+  const bottomVisuals = [
+    { type: 'video', src: "https://www.dropbox.com/scl/fi/deuzr7c3qtsk5saotxz5k/IMG_1947.MOV?rlkey=wosqd9no3nu65z6r1xsj60gdd&st=t9weq56y&raw=1" },
+    { type: 'image', src: "https://www.dropbox.com/scl/fi/svcnqnwqk7o0mff2a6048/nzj3a9fligppwccitvcn.webp?rlkey=xm07a20q213qyeq64dl6bv7rg&st=e3k7t36d&raw=1" },
+    { type: 'image', src: "https://www.dropbox.com/scl/fi/okzesgkbmuc4dqjnhmtuv/rjq1mwxrmdl18saovwdq.webp?rlkey=d5jp6larynsxaaib7qyyw7trm&st=2ufmgntd&raw=1" }
+  ];
+
   return (
     <section className="py-24 px-4 md:px-8 lg:px-12 bg-primary">
       <div className="max-w-7xl mx-auto">
@@ -53,7 +59,7 @@ const About = () => {
           >
             <div className="h-48 rounded-2xl overflow-hidden relative group">
               <img 
-                src="https://images.unsplash.com/photo-1553028826-f4804a6dba3b?q=80&w=800&auto=format&fit=crop" 
+                src="https://www.dropbox.com/scl/fi/4zohckn30rsfrulnbwjgk/Screenshot-2026-05-09-at-10.23.15-PM.png?rlkey=666s7wgo6jol98gmli9yv2d54&st=vmpni29m&raw=1" 
                 alt="Creator Portrait" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
               />
@@ -83,11 +89,7 @@ const About = () => {
 
         {/* Bottom Visual Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=800&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1618220179428-22790b46a0eb?q=80&w=800&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800&auto=format&fit=crop"
-          ].map((src, idx) => (
+          {bottomVisuals.map((item, idx) => (
             <motion.div 
               key={idx}
               initial={{ opacity: 0, filter: 'blur(10px)' }}
@@ -96,11 +98,22 @@ const About = () => {
               transition={{ duration: 1.5, delay: idx * 0.2 }}
               className="h-64 rounded-2xl overflow-hidden relative group"
             >
-              <img 
-                src={src} 
-                alt="Aesthetic visual" 
-                className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-1000"
-              />
+              {item.type === 'video' ? (
+                <video 
+                  src={item.src} 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline 
+                  className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-1000"
+                />
+              ) : (
+                <img 
+                  src={item.src} 
+                  alt="Aesthetic visual" 
+                  className={`w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-1000 ${idx === 2 ? 'object-[center_20%]' : ''}`}
+                />
+              )}
               {idx === 1 && (
                 <div className="absolute inset-0 flex items-center justify-center">
                    <div className="w-12 h-12 bg-accentPink rounded-full flex items-center justify-center text-white group-hover:bg-accentLime group-hover:text-textMain transition-colors duration-500">

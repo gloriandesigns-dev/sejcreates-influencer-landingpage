@@ -6,19 +6,19 @@ const insightsData = [
     category: "MARKETING",
     read_time: "5 min read",
     title: "Why modern brands need emotional storytelling instead of performance hacks",
-    img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800&auto=format&fit=crop"
+    img: "https://www.dropbox.com/scl/fi/htv4f63euspktfgl605qc/1aa2a377295f7be87fc8101a07aae229.webp?rlkey=k55itn8l1mdl1597be0cowb8e&st=58o7eerb&raw=1"
   },
   {
     category: "CREATOR ECONOMY",
     read_time: "4 min read",
     title: "Internet-native creators are becoming the new media companies",
-    img: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop"
+    img: "https://www.dropbox.com/scl/fi/p7uwdvafjzpzvh0b2jvlt/10af31c7d7a50fe52a2cd86807ce4327.webp?rlkey=rnr6dmtjmh473sfa9vkvs139r&st=har8ym4r&raw=1"
   },
   {
     category: "CONSUMER PSYCHOLOGY",
     read_time: "6 min read",
     title: "People don't buy products. They buy perspective and identity.",
-    img: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=800&auto=format&fit=crop"
+    img: "https://www.dropbox.com/scl/fi/fh1bmoqr8h8b21ikgaa9u/900cd0e86a2393f1d672488a8e70aa4e.webp?rlkey=ylkz09d63nzja69csa8n1o4sx&st=xqj4ij68&raw=1"
   }
 ];
 
@@ -55,14 +55,14 @@ const Insights = () => {
               transition={{ duration: 1.5, delay: idx * 0.15, ease: [0.25, 1, 0.5, 1] }}
               className="group flex flex-col gap-6 bg-white/50 p-4 rounded-3xl border border-accentPink/20 hover:border-accentPink hover:shadow-sm transition-all duration-700 hover:-translate-y-2"
             >
-              <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-secondary relative">
+              <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden relative">
                 <img 
                   src={item.img} 
                   alt={item.title} 
-                  className="w-full h-full object-cover opacity-80 mix-blend-multiply group-hover:mix-blend-normal group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-cinematic"
+                  className={`w-full h-full object-cover group-hover:scale-105 transition-all duration-1000 ease-cinematic ${idx === 1 ? 'object-[center_20%]' : ''}`}
                 />
-                {/* Subtle color reflections on hover */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-accentPink/20 to-accentLime/20 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 mix-blend-overlay pointer-events-none"></div>
+                {/* 40% Neon overlay on hover */}
+                <div className="absolute inset-0 bg-accentLime opacity-0 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none mix-blend-multiply"></div>
               </div>
               
               <div className="flex flex-col gap-4 px-2 pb-4">
