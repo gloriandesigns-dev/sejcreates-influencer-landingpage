@@ -45,19 +45,22 @@ const reelsData = [
 ];
 
 const ReelCard = ({ item }: { item: typeof reelsData[0] }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const handleMouseEnter = () => {
     if (videoRef.current) {
+      // Programmatically unmute and play
       videoRef.current.muted = false;
-      videoRef.current.play().catch(() => {
-        // Silence the "interrupted by call to pause" error
+      videoRef.current.play().catch((error) => {
+        // Log to console to investigate browser autoplay policy blocks in production
+        console.warn("Video playback or unmuting failed on hover:", error);
       });
     }
   };
 
   const handleMouseLeave = () => {
     if (videoRef.current) {
+      // Programmatically pause and mute
       videoRef.current.pause();
       videoRef.current.muted = true;
     }
@@ -73,7 +76,7 @@ const ReelCard = ({ item }: { item: typeof reelsData[0] }) => {
         ref={videoRef}
         src={item.video}
         loop
-        muted
+        muted={true}
         playsInline
         className="w-full h-full object-cover group-hover/card:scale-105 transition-all duration-1000"
       />

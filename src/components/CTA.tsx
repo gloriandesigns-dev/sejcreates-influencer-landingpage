@@ -68,7 +68,9 @@ const CTA = () => {
           </p>
           
           <a 
-            href="mailto:team@sejcurates.com" 
+            href="https://calendly.com/team-sejcurates/30min" 
+            target="_blank" 
+            rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm md:text-base uppercase tracking-[0.2em] font-medium text-textMain hover:text-accentPink transition-colors duration-500 relative group/btn"
           >
             Let's Talk <ArrowUpRight size={18} className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-500" />

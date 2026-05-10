@@ -150,7 +150,7 @@ const Hero = () => {
           </a>
         </div>
         <div>
-          <a href="#" className="flex items-center gap-1 hover:text-accentPink relative group transition-colors duration-700">
+          <a href="https://calendly.com/team-sejcurates/30min" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-accentPink relative group transition-colors duration-700">
             Book A Call <ArrowUpRight size={14} className="group-hover:text-accentLime transition-colors duration-700" />
             <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-accentLime group-hover:w-full transition-all duration-700 ease-cinematic"></span>
           </a>

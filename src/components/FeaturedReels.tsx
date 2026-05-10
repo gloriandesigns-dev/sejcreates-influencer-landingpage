@@ -21,21 +21,22 @@ const featuredData = [
 ];
 
 const FeaturedCard = ({ item, idx }: { item: typeof featuredData[0], idx: number }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   
   const handleMouseEnter = () => {
     if (videoRef.current) {
+      // Programmatically unmute and play
       videoRef.current.muted = false;
-      // play() returns a promise; we catch the interruption error 
-      // that occurs if pause() is called before play() finishes.
-      videoRef.current.play().catch(() => {
-        // Silence the "interrupted by call to pause" error
+      videoRef.current.play().catch((error) => {
+        // Log to console to investigate browser autoplay policy blocks in production
+        console.warn("Video playback or unmuting failed on hover:", error);
       });
     }
   };
   
   const handleMouseLeave = () => {
     if (videoRef.current) {
+      // Programmatically pause and mute
       videoRef.current.pause();
       videoRef.current.muted = true;
     }
@@ -64,7 +65,7 @@ const FeaturedCard = ({ item, idx }: { item: typeof featuredData[0], idx: number
           ref={videoRef}
           src={item.video} 
           loop
-          muted
+          muted={true}
           playsInline
           className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-cinematic"
         />

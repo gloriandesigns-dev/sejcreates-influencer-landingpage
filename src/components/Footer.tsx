@@ -13,10 +13,10 @@ const Footer = () => {
           </h2>
           <div className="relative inline-block">
             <a 
-              href="mailto:hello@sejcurates.com" 
+              href="mailto:team@sejcurates.com" 
               className="text-4xl md:text-5xl lg:text-6xl font-sans text-gray-400 hover:text-white transition-colors duration-500 tracking-tight"
             >
-              hello@sejcurates.com
+              team@sejcurates.com
             </a>
             {/* Custom Squiggly Underline matching the reference with draw animation */}
             <svg 
