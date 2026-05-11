@@ -25,7 +25,7 @@ const BrandsTicker = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-accentPink block"></span> Worked With
           </p>
           <h2 className="text-2xl md:text-3xl font-display font-light text-textMain max-w-xl">
-            Brands, institutions, and ecosystems I've learned from.
+            Brands, institutions, and ecosystems.
           </h2>
         </motion.div>
       </div>

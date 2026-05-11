@@ -1,22 +1,27 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Play } from 'lucide-react';
+import { Play } from 'lucide-react';
 
 const featuredData = [
   {
-    title: "Why D2C brands fail to create emotional memory",
-    type: "Instagram Reel",
-    video: "https://www.dropbox.com/scl/fi/hbsqx156dasbyvwpfbxq2/sejcurates_1777821481_3888723287213192739_71849440928.mp4?rlkey=xllcnyb8aai2tzzmkvm7unoh7&st=i4j3377n&raw=1"
+    title: "Factory Exploration: The Production Line",
+    video: "https://www.dropbox.com/scl/fi/5tnmfxas1wrsfxbq73vcg/Video-207-1.mp4?rlkey=smy3vv9bctyyn76lbr0ma3aqj&st=59pr0e7x&raw=1",
+    link: "https://www.instagram.com/reel/DYMH7ldoVEi/?igsh=MWhrbXdxM2o5M25xaA=="
   },
   {
-    title: "Consumer psychology behind internet-first brands",
-    type: "Perspective Breakdown",
-    video: "https://www.dropbox.com/scl/fi/6c4qowggrd5uklp20xgia/sejcurates_1773839488_3855338724758503494_71849440928.mp4?rlkey=8ir4pgaa5wipp7o2vzawvc632&st=nnr51zhk&raw=1"
+    title: "Behind the Scenes: Material Sourcing",
+    video: "https://www.dropbox.com/scl/fi/6c4qowggrd5uklp20xgia/sejcurates_1773839488_3855338724758503494_71849440928.mp4?rlkey=8ir4pgaa5wipp7o2vzawvc632&st=ddms973q&raw=1",
+    link: "https://www.instagram.com/reel/DWA6iTKCcBG/?igsh=aW16anExb3VpcGZp"
   },
   {
-    title: "AI will not replace creators — bland storytelling will",
-    type: "Opinion Reel",
-    video: "https://www.dropbox.com/scl/fi/y77tnyj0c9aolxrosmeeh/sejcurates_1778075193_3891098317188389548_71849440928.mp4?rlkey=eedwe6z3zwqkc0cpyck3neuxx&st=rdvhdhkm&raw=1"
+    title: "Craftsmanship & Assembly Process",
+    video: "https://www.dropbox.com/scl/fi/3yu72f8w5flcb73exqpyd/sejcurates_1773320266_3851211492628671418_71849440928-1.mp4?rlkey=j4662g1md9kx3fvu3oosk8419&st=m6hif9hw&raw=1",
+    link: "https://www.instagram.com/reel/DVyQHKtCKu6/?igsh=NDdlNjZ6djNzaGxw"
+  },
+  {
+    title: "Warehouse & Distribution Logistics",
+    video: "https://www.dropbox.com/scl/fi/vtzvvs5u8ov06tparecfu/Video-144-1.mp4?rlkey=xzg23waxe8rvgqjtg4kznv063&st=o5cjbtb7&raw=1",
+    link: "https://www.instagram.com/reel/DU0ahhpidOi/?igsh=MWI2eHZrdTUxaXl3aQ=="
   }
 ];
 
@@ -25,25 +30,25 @@ const FeaturedCard = ({ item, idx }: { item: typeof featuredData[0], idx: number
   
   const handleMouseEnter = () => {
     if (videoRef.current) {
-      // Programmatically unmute and play
       videoRef.current.muted = false;
       videoRef.current.play().catch((error) => {
-        // Log to console to investigate browser autoplay policy blocks in production
-        console.warn("Video playback or unmuting failed on hover:", error);
+        console.warn("Video playback or unmuting failed on hover/touch:", error);
       });
     }
   };
   
   const handleMouseLeave = () => {
     if (videoRef.current) {
-      // Programmatically pause and mute
       videoRef.current.pause();
       videoRef.current.muted = true;
     }
   };
 
   return (
-    <motion.div 
+    <motion.a 
+      href={item.link}
+      target="_blank"
+      rel="noopener noreferrer"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
@@ -53,20 +58,24 @@ const FeaturedCard = ({ item, idx }: { item: typeof featuredData[0], idx: number
           opacity: 1, 
           y: 0, 
           filter: 'blur(0px)',
-          transition: { duration: 1.5, delay: idx * 0.2, ease: [0.25, 1, 0.5, 1] } 
+          transition: { duration: 1.5, delay: idx * 0.15, ease: [0.25, 1, 0.5, 1] } 
         }
       }}
-      className="group cursor-pointer flex flex-col gap-6"
+      className="group cursor-pointer flex flex-col gap-4 block"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={handleMouseEnter}
+      onTouchEnd={handleMouseLeave}
+      onTouchCancel={handleMouseLeave}
     >
-      <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-secondary">
+      <div className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden bg-secondary">
         <video 
           ref={videoRef}
           src={item.video} 
           loop
           muted={true}
           playsInline
+          preload="auto"
           className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-cinematic"
         />
         {/* Play Button Overlay */}
@@ -77,15 +86,12 @@ const FeaturedCard = ({ item, idx }: { item: typeof featuredData[0], idx: number
         </div>
       </div>
       
-      <div className="flex flex-col gap-3 px-2">
-        <p className="text-[10px] uppercase tracking-[0.2em] text-textMuted">
-          {item.type}
-        </p>
-        <h3 className="text-lg md:text-xl font-display font-light leading-snug group-hover:text-accentPink transition-colors duration-500">
+      <div className="flex flex-col px-1">
+        <h3 className="text-base md:text-lg font-display font-light leading-snug group-hover:text-accentPink transition-colors duration-500">
           {item.title}
         </h3>
       </div>
-    </motion.div>
+    </motion.a>
   );
 };
 
@@ -105,43 +111,53 @@ const FeaturedReels = () => {
       <div className="max-w-7xl mx-auto">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+        <div className="flex flex-col mb-16 gap-4">
           <motion.div 
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUpVariants}
-            className="max-w-2xl"
+            className="max-w-3xl"
           >
             <p className="text-[10px] uppercase tracking-[0.2em] text-textMuted mb-6 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-accentPink block"></span> Perspectives
+              <span className="w-1.5 h-1.5 rounded-full bg-accentPink block"></span> FACTORY EXPLORATION FRAMES
             </p>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-light tracking-tight mb-6">
-              Selected Stories & Reels
+              Where It's Actually Made
             </h2>
-            <p className="text-textMuted font-light leading-relaxed max-w-lg">
-              Thoughts on brands, internet culture, creator psychology, AI, and modern consumer behavior.
+            <p className="text-textMuted font-light leading-relaxed max-w-xl">
+              Exploring factories, warehouses, and workshops, covering the processes and stories behind the products you love!
             </p>
-          </motion.div>
-          
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeUpVariants}
-          >
-            <a href="#" className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-textMuted hover:text-accentPink transition-colors duration-500 group">
-              View All <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-500" />
-            </a>
           </motion.div>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+        {/* Grid: 4 columns for 9:16 reels */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {featuredData.map((item, idx) => (
             <FeaturedCard key={idx} item={item} idx={idx} />
           ))}
         </div>
+
+        {/* Sharp Collaborate Button */}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeUpVariants}
+          className="mt-20 flex justify-center"
+        >
+          <a 
+            href="https://calendly.com/team-sejcurates/30min" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="relative overflow-hidden bg-accentPink text-white px-10 py-5 font-medium uppercase tracking-widest text-sm group rounded-full border border-transparent group-hover:border-accentPink transition-colors duration-500"
+          >
+            <span className="relative z-10 group-hover:text-accentPink transition-colors duration-500">
+              Collaborate with me
+            </span>
+            <div className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-cinematic origin-left rounded-full"></div>
+          </a>
+        </motion.div>
 
       </div>
     </section>

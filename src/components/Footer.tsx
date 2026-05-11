@@ -40,9 +40,8 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Middle Section: Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 mb-16">
-          {/* Column 1 */}
+        {/* Middle Section: Media Inquiries Only */}
+        <div className="mb-16">
           <div>
             <h4 className="text-xs font-semibold text-gray-400 mb-6 tracking-wide">Media Inquiries</h4>
             <div className="flex items-center gap-5">
@@ -71,22 +70,6 @@ const Footer = () => {
                 </svg>
               </a>
             </div>
-          </div>
-
-          {/* Column 2 */}
-          <div>
-            <h4 className="text-xs font-semibold text-gray-400 mb-6 tracking-wide">Sales</h4>
-            <a href="mailto:sales@sejcurates.com" className="text-sm md:text-base font-medium text-white hover:text-accentPink transition-colors">
-              sales@sejcurates.com
-            </a>
-          </div>
-
-          {/* Column 3 */}
-          <div>
-            <h4 className="text-xs font-semibold text-gray-400 mb-6 tracking-wide">Careers</h4>
-            <a href="mailto:careers@sejcurates.com" className="text-sm md:text-base font-medium text-white hover:text-accentPink transition-colors">
-              careers@sejcurates.com
-            </a>
           </div>
         </div>
 

@@ -64,7 +64,7 @@ const CTA = () => {
           </h2>
           
           <p className="text-base md:text-xl text-textMain font-light leading-relaxed max-w-2xl mb-16">
-            Whether it's brand storytelling, D2C strategy, creator collaborations, or internet-first campaigns — let's create perspectives that people remember.
+            Whether it's brand storytelling, D2C strategy, creator collaborations, or internet-first campaigns - let's create perspectives that people remember.
           </p>
           
           <a 

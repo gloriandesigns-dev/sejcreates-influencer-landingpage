@@ -49,10 +49,8 @@ const ReelCard = ({ item }: { item: typeof reelsData[0] }) => {
 
   const handleMouseEnter = () => {
     if (videoRef.current) {
-      // Programmatically unmute and play
       videoRef.current.muted = false;
       videoRef.current.play().catch((error) => {
-        // Log to console to investigate browser autoplay policy blocks in production
         console.warn("Video playback or unmuting failed on hover:", error);
       });
     }
@@ -60,7 +58,6 @@ const ReelCard = ({ item }: { item: typeof reelsData[0] }) => {
 
   const handleMouseLeave = () => {
     if (videoRef.current) {
-      // Programmatically pause and mute
       videoRef.current.pause();
       videoRef.current.muted = true;
     }
@@ -78,6 +75,7 @@ const ReelCard = ({ item }: { item: typeof reelsData[0] }) => {
         loop
         muted={true}
         playsInline
+        preload="auto"
         className="w-full h-full object-cover group-hover/card:scale-105 transition-all duration-1000"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-accentPink/80 via-transparent to-transparent opacity-80 group-hover/card:opacity-100 transition-opacity duration-500" />
@@ -89,7 +87,6 @@ const ReelCard = ({ item }: { item: typeof reelsData[0] }) => {
 };
 
 const ReelsTicker = () => {
-  // Duplicate array for seamless looping
   const tickerItems = [...reelsData, ...reelsData];
 
   return (
@@ -112,7 +109,6 @@ const ReelsTicker = () => {
         >
           Stories, strategy, culture, and{' '}
           <span className="relative inline-block text-textMain px-1">
-            {/* Left-to-right wipe animation background */}
             <motion.span 
               className="absolute inset-0 bg-accentLime -z-10 origin-left"
               initial={{ scaleX: 0 }}
@@ -131,7 +127,7 @@ const ReelsTicker = () => {
           animate={{ x: ["0%", "-50%"] }}
           transition={{ 
             ease: "linear", 
-            duration: 80, // Slower for 20 items
+            duration: 80,
             repeat: Infinity,
           }}
           style={{ width: "max-content" }}

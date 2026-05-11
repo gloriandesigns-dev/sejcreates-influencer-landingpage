@@ -15,7 +15,7 @@ const PhilosophyDivider = () => {
           transition={{ duration: 2, ease: [0.25, 1, 0.5, 1] }}
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-light leading-relaxed text-textMain mb-12">
-            "From competing in sports to presenting at business school, from corporate boardrooms to creating content — I've never stopped being a student."
+            "From competing in sports to presenting at business school, from corporate boardrooms to creating content. I've never stopped being a student."
           </h2>
           
           <p className="text-sm md:text-base text-accentPink font-medium tracking-wide">
