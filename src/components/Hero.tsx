@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion, useInView, animate } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
-const AnimatedNumber = ({ value, prefix = "", suffix = "" }: { value: number, prefix?: string, suffix?: string }) => {
+const AnimatedNumber = ({ value, prefix = "", suffix = "", decimals = 0 }: { value: number, prefix?: string, suffix?: string, decimals?: number }) => {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-50px" });
 
@@ -13,15 +13,14 @@ const AnimatedNumber = ({ value, prefix = "", suffix = "" }: { value: number, pr
         ease: [0.25, 1, 0.5, 1],
         onUpdate(v) {
           if (ref.current) {
-            ref.current.textContent = `${prefix}${Math.round(v)}${suffix}`;
+            ref.current.textContent = `${prefix}${v.toFixed(decimals)}${suffix}`;
           }
         }
       });
       return () => controls.stop();
     }
-  }, [inView, value, prefix, suffix]);
+  }, [inView, value, prefix, suffix, decimals]);
 
-  // Added tabular-nums to prevent horizontal jittering as digit widths change during the countdown
   return <span ref={ref} className="tabular-nums">{prefix}0{suffix}</span>;
 };
 
@@ -30,7 +29,6 @@ const ScrambleText = ({ text }: { text: string }) => {
   const inView = useInView(ref, { once: true, margin: "-50px" });
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   
-  // Initialize with scrambled text to prevent the original text from flashing/glitching on load
   const [initialText] = useState(() => 
     text.split("").map(char => char === " " ? " " : letters[Math.floor(Math.random() * letters.length)]).join("")
   );
@@ -87,7 +85,6 @@ const TypewriterHeading = () => {
   }, [inView]);
 
   return (
-    // Adjusted responsive font sizes for smoother scaling and changed min-h to perfectly match the leading
     <h1 ref={ref} className="text-[120px] sm:text-[160px] md:text-[180px] lg:text-[200px] 2xl:text-[240px] leading-[0.85] font-display font-light tracking-tighter mb-8 -ml-2 text-[#cdf578] min-h-[0.85em] whitespace-nowrap">
       {text}
       <motion.span
@@ -102,6 +99,8 @@ const TypewriterHeading = () => {
 };
 
 const Hero = () => {
+  const mailtoLink = "mailto:team@sejcurates.com?subject=I%20would%20love%20to%20collaborate&body=Hey%20Sejal%2C%20I%20would%20love%20to%20collaborate%20with%20you.";
+
   const fadeBlurVariants = {
     hidden: { opacity: 0, filter: 'blur(24px)' },
     visible: { 
@@ -156,25 +155,24 @@ const Hero = () => {
           </a>
         </div>
         <div>
-          <a href="https://calendly.com/team-sejcurates/30min" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-accentPink relative group transition-colors duration-700">
+          <a href={mailtoLink} className="flex items-center gap-1 hover:text-accentPink relative group transition-colors duration-700">
             Book A Call <ArrowUpRight size={14} className="group-hover:text-accentLime transition-colors duration-700" />
             <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-accentLime group-hover:w-full transition-all duration-700 ease-cinematic"></span>
           </a>
         </div>
       </motion.nav>
 
-      <div className="w-full lg:w-[52%] relative z-10 flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-32 pb-24 lg:py-0 min-h-[70vh] lg:min-h-screen">
+      <div className="w-full lg:w-[52%] relative z-10 flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-24 pb-16 lg:py-0 min-h-[70vh] lg:min-h-screen">
         
         <motion.div 
           variants={fadeBlurVariants}
           initial="hidden"
           animate="visible"
-          className="absolute left-4 md:left-8 top-[65%] -translate-y-1/2 -rotate-90 origin-left text-[9px] uppercase tracking-[0.3em] text-textMuted hidden lg:block whitespace-nowrap"
+          className="absolute left-4 md:left-8 top-[75%] -translate-y-1/2 -rotate-90 origin-left text-[9px] uppercase tracking-[0.3em] text-textMuted hidden lg:block whitespace-nowrap"
         >
           Content Strategist . @sejcurates . Digital Strategist
         </motion.div>
 
-        {/* Removed max-w-xl constraint on large screens to prevent flex wrapping/layout shifts */}
         <motion.div 
           variants={staggerContainer}
           initial="hidden"
@@ -184,7 +182,7 @@ const Hero = () => {
           <motion.div variants={textRiseVariants} className="flex flex-wrap gap-8 md:gap-12 mb-12 md:mb-20">
             <div>
               <p className="text-3xl md:text-4xl font-display font-light mb-2 tracking-tight text-textMain">
-                <AnimatedNumber value={27} prefix="" suffix="k+" />
+                <AnimatedNumber value={43.3} prefix="" suffix="k+" decimals={1} />
               </p>
               <p className="text-[9px] text-textMuted uppercase tracking-[0.2em]">Followers</p>
             </div>
@@ -195,7 +193,6 @@ const Hero = () => {
               <p className="text-[9px] text-textMuted uppercase tracking-[0.2em]">Brands</p>
             </div>
             <div>
-              {/* Added whitespace-nowrap to prevent vertical jumpiness if the scramble text tries to wrap */}
               <p className="text-xl sm:text-2xl md:text-3xl font-display font-light mb-2 tracking-tight text-textMain whitespace-nowrap">
                 <ScrambleText text="London Business School" />
               </p>
@@ -246,7 +243,7 @@ const Hero = () => {
           alt="Sejcurates Portrait" 
           fetchPriority="high"
           loading="eager"
-          className="w-[85%] lg:w-[90%] h-auto max-h-[90vh] object-contain object-bottom absolute bottom-0 right-0"
+          className="w-[85%] lg:w-[90%] h-auto max-h-[90vh] object-contain object-bottom absolute bottom-0 right-[8%]"
         />
       </div>
 

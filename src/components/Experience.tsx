@@ -65,11 +65,11 @@ const Experience = () => {
   };
 
   return (
-    <section className="py-32 px-6 md:px-12 lg:px-24 bg-primary text-textMain">
+    <section className="py-20 px-6 md:px-12 lg:px-24 bg-primary text-textMain">
       <div className="max-w-7xl mx-auto">
         
         {/* Header */}
-        <header className="flex flex-col md:flex-row justify-between items-start mb-24 gap-12">
+        <header className="flex flex-col md:flex-row justify-between items-start mb-16 gap-12">
           <motion.div 
             initial="hidden"
             whileInView="visible"
@@ -95,15 +95,15 @@ const Experience = () => {
             <p className="text-textMuted leading-relaxed font-light text-sm md:text-base">
               From business school classrooms to startup building, from strategy decks to creator storytelling - every phase shaped the perspective-driven way I think about brands, people, and internet culture today.
             </p>
-            <a href="#" className="flex items-center gap-1 text-xs uppercase tracking-[0.2em] font-medium hover:text-accentPink transition-colors duration-500 group relative">
+            <a href="mailto:team@sejcurates.com?subject=I%20would%20love%20to%20collaborate&body=Hey%20Sejal%2C%20I%20would%20love%20to%20collaborate%20with%20you." className="flex items-center gap-1 text-xs uppercase tracking-[0.2em] font-medium hover:text-accentPink transition-colors duration-500 group relative">
               Book A Call <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-500" />
               <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-accentPink group-hover:w-full transition-all duration-700 ease-cinematic"></span>
             </a>
           </motion.div>
         </header>
 
-        {/* Timeline List */}
-        <div className="flex flex-col">
+        {/* Timeline Grid: 3 columns, 2 rows */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {experiences.map((exp, idx) => (
             <motion.div 
               key={idx}
@@ -111,31 +111,28 @@ const Experience = () => {
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
               variants={rowVariants}
-              className="py-12 border-t border-borderSoft grid grid-cols-1 md:grid-cols-12 gap-8 group hover:bg-white/40 transition-colors duration-700 -mx-6 px-6 md:-mx-12 md:px-12 rounded-2xl"
+              className="p-8 bg-white border border-accentPink/30 rounded-2xl flex flex-col hover:border-accentPink hover:shadow-[0_10px_30px_-10px_rgba(226,120,168,0.2)] transition-all duration-700 group"
             >
-              {/* Left Column: Org & Timeline */}
-              <div className="md:col-span-4 flex flex-col justify-center">
-                <h3 className="text-xl md:text-2xl font-display mb-2">{exp.organization}</h3>
-                <p className="text-sm text-textMuted flex items-center gap-2">
+              <div className="mb-6">
+                <h3 className="text-xl font-display mb-1">{exp.organization}</h3>
+                <p className="text-[10px] uppercase tracking-widest text-textMuted flex items-center gap-2">
                   <span className="w-1 h-1 rounded-full bg-accentPink block"></span>
                   {exp.timeline}
                 </p>
               </div>
 
-              {/* Middle Column: Role & Description */}
-              <div className="md:col-span-5 flex flex-col justify-center">
-                <h4 className="text-base text-textMain mb-2">{exp.role}{exp.location !== 'Global' && exp.location !== 'Remote' && `, ${exp.location}`}</h4>
-                <p className="text-sm text-textMuted font-light leading-relaxed">
+              <div className="mb-8 flex-grow">
+                <h4 className="text-sm font-semibold text-textMain mb-3 uppercase tracking-wider">{exp.role}</h4>
+                <p className="text-xs text-textMuted font-light leading-relaxed">
                   {exp.description}
                 </p>
               </div>
 
-              {/* Right Column: Tags */}
-              <div className="md:col-span-3 flex flex-wrap md:justify-end items-center gap-2 h-fit md:h-full mt-4 md:mt-0">
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-accentPink/10">
                 {exp.tags.map((tag, i) => (
                   <span 
                     key={i} 
-                    className="px-4 py-1.5 rounded-full border border-accentPink/30 text-[10px] uppercase tracking-widest text-accentPink group-hover:border-accentPink group-hover:bg-accentPink group-hover:text-white group-hover:shadow-[0_0_15px_rgba(226,120,168,0.3)] transition-all duration-500 bg-transparent"
+                    className="px-3 py-1 rounded-full border border-accentPink/20 text-[9px] uppercase tracking-widest text-accentPink group-hover:bg-accentPink group-hover:text-white transition-all duration-500"
                   >
                     {tag}
                   </span>
@@ -144,8 +141,6 @@ const Experience = () => {
             </motion.div>
           ))}
         </div>
-        
-        <div className="border-t border-borderSoft w-full mt-4"></div>
       </div>
     </section>
   );

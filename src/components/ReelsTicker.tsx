@@ -90,7 +90,7 @@ const ReelsTicker = () => {
   const tickerItems = [...reelsData, ...reelsData];
 
   return (
-    <section className="py-24 bg-primary overflow-hidden">
+    <section className="py-16 bg-primary overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 mb-12">
         <motion.p 
           initial={{ opacity: 0 }}

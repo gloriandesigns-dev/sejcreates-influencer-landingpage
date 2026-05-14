@@ -24,16 +24,15 @@ const insightsData = [
 
 const Insights = () => {
   return (
-    <section className="py-32 px-6 md:px-12 lg:px-24 bg-primary text-textMain">
+    <section className="py-20 px-6 md:px-12 lg:px-24 bg-primary text-textMain">
       <div className="max-w-7xl mx-auto">
         
-        {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1.8, ease: [0.25, 1, 0.5, 1] }}
-          className="text-center flex flex-col items-center mb-24"
+          className="text-center flex flex-col items-center mb-16"
         >
           <p className="text-[10px] uppercase tracking-[0.2em] text-textMuted mb-6 flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-accentPink block"></span> Writing
@@ -43,7 +42,6 @@ const Insights = () => {
           </h2>
         </motion.div>
 
-        {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
           {insightsData.map((item, idx) => (
             <motion.a 
@@ -61,7 +59,6 @@ const Insights = () => {
                   alt={item.title} 
                   className={`w-full h-full object-cover group-hover:scale-105 transition-all duration-1000 ease-cinematic ${idx === 1 ? 'object-[center_20%]' : ''}`}
                 />
-                {/* 40% Neon overlay on hover */}
                 <div className="absolute inset-0 bg-accentLime opacity-0 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none mix-blend-multiply"></div>
               </div>
               

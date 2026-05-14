@@ -4,12 +4,22 @@ import { Plus } from 'lucide-react';
 
 const About = () => {
   const bottomVisuals = [
-    { type: 'image', src: "https://www.dropbox.com/scl/fi/u54vadiycc9m8hid8vk09/bykval8nfzlcykqpavzr.webp?rlkey=1f4zwej6ggf376rnwf4xtrsq1&st=r0rxx7by&raw=1" },
-    { type: 'video', src: "https://www.dropbox.com/scl/fi/deuzr7c3qtsk5saotxz5k/IMG_1947.MOV?rlkey=wosqd9no3nu65z6r1xsj60gdd&st=yh80gqm2&raw=1" }
+    { 
+      type: 'image', 
+      src: "https://www.dropbox.com/scl/fi/u54vadiycc9m8hid8vk09/bykval8nfzlcykqpavzr.webp?rlkey=1f4zwej6ggf376rnwf4xtrsq1&st=rek2yw1a&raw=1" 
+    },
+    { 
+      type: 'image', 
+      src: "https://www.dropbox.com/scl/fi/okzesgkbmuc4dqjnhmtuv/rjq1mwxrmdl18saovwdq.webp?rlkey=d5jp6larynsxaaib7qyyw7trm&st=cp2yehmc&raw=1" 
+    },
+    { 
+      type: 'video', 
+      src: "https://www.dropbox.com/scl/fi/deuzr7c3qtsk5saotxz5k/IMG_1947.MOV?rlkey=wosqd9no3nu65z6r1xsj60gdd&st=yh80gqm2&raw=1" 
+    }
   ];
 
   return (
-    <section className="py-24 px-4 md:px-8 lg:px-12 bg-primary">
+    <section className="py-16 px-4 md:px-8 lg:px-12 bg-primary">
       <div className="max-w-7xl mx-auto">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
@@ -27,30 +37,28 @@ const About = () => {
             </p>
           </motion.div>
 
-          {/* Center Metric Card */}
+          {/* Center Column: Split into two blocks */}
           <motion.div 
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1.4, ease: "easeOut", delay: 0.2 }}
-            className="lg:col-span-4"
+            className="lg:col-span-4 flex flex-col gap-4"
           >
-            <div className="relative p-8 rounded-2xl shadow-sm border border-accentPink/30 h-full min-h-[360px] flex flex-col justify-end hover:-translate-y-2 hover:shadow-[0_10px_40px_-10px_#E278A8] transition-all duration-700 overflow-hidden group">
-              <div className="absolute inset-0 z-0">
-                <img 
-                  src="https://www.dropbox.com/scl/fi/t958bquehj4nnjkon7w5i/IMG_8761.jpg?rlkey=jqiemqlef2ux82flke4zd0hr5&st=5gdf2b1y&raw=1" 
-                  alt="Background" 
-                  loading="eager"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
-                />
-                <div className="absolute inset-0 bg-black/30"></div>
-              </div>
-              <div className="relative z-10">
-                <h3 className="text-6xl font-display mb-4 text-white">27k+</h3>
-                <p className="text-sm text-white/90 leading-relaxed">
-                  Audience built through relatable brand storytelling and creator-led education
-                </p>
-              </div>
+            {/* Top Image Block */}
+            <div className="relative rounded-2xl overflow-hidden h-48 group">
+              <img 
+                src="https://www.dropbox.com/scl/fi/1ue1yhnecu1sip0c821bl/IMG_8782.jpg?rlkey=hdkruewc50ufyzlq4wlx2g7fh&st=bvnglfcd&raw=1" 
+                alt="Sejal" 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+              />
+            </div>
+            
+            {/* Bottom Neon Block */}
+            <div className="bg-accentLime p-8 rounded-2xl flex flex-col justify-center border border-accentPink/10">
+              <p className="text-sm text-textMain leading-relaxed font-medium">
+                Because one perspective can change how you grow, and that growth creates impact. Reading, learning, and creating has genuinely changed how I see the world. Come experience it with me!
+              </p>
             </div>
           </motion.div>
 
@@ -86,8 +94,7 @@ const About = () => {
         </div>
 
         {/* Bottom Visual Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
-          {/* Dotted Grid Pattern to balance the left side */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
           <div 
             className="hidden md:block absolute left-4 lg:left-12 top-1/2 -translate-y-1/2 w-40 h-40 lg:w-56 lg:h-56 opacity-20 pointer-events-none -z-10" 
             style={{ 
@@ -103,11 +110,11 @@ const About = () => {
               whileInView={{ opacity: 1, filter: 'blur(0px)' }}
               viewport={{ once: true }}
               transition={{ duration: 1.5, delay: idx * 0.2 }}
-              className={`rounded-2xl overflow-hidden relative group h-[280px] md:h-[320px] ${item.type === 'image' ? 'aspect-square w-full max-w-[280px] md:max-w-[320px] ml-auto' : 'w-full'}`}
+              className="rounded-2xl overflow-hidden relative group h-[280px] md:h-[320px] transition-all duration-700 w-full"
             >
               {item.type === 'video' ? (
                 <video 
-                  src={item.src} 
+                  src={item.video} 
                   autoPlay 
                   loop 
                   muted 

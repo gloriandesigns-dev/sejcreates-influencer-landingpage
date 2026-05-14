@@ -9,11 +9,10 @@ const brands = [
 ];
 
 const BrandsTicker = () => {
-  // Duplicate for seamless infinite scroll
   const tickerItems = [...brands, ...brands, ...brands, ...brands];
 
   return (
-    <section className="py-24 bg-primary overflow-hidden border-b border-borderSoft/50">
+    <section className="py-16 bg-primary overflow-hidden border-b border-borderSoft/50">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 mb-16">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -31,7 +30,6 @@ const BrandsTicker = () => {
       </div>
 
       <div className="relative w-full flex overflow-hidden group">
-        {/* Subtle gradient masks for smooth fade in/out at edges */}
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-primary to-transparent z-10 pointer-events-none"></div>
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-primary to-transparent z-10 pointer-events-none"></div>
 
@@ -40,7 +38,7 @@ const BrandsTicker = () => {
           animate={{ x: ["0%", "-50%"] }}
           transition={{ 
             ease: "linear", 
-            duration: 45, // Increased speed slightly
+            duration: 15, // Increased speed significantly (from 25s to 15s)
             repeat: Infinity,
           }}
           style={{ width: "max-content" }}
@@ -55,7 +53,6 @@ const BrandsTicker = () => {
                 alt="Brand Logo" 
                 className="h-12 md:h-16 w-auto object-contain opacity-40 group-hover/logo:opacity-100 transition-all duration-1000 relative z-10" 
               />
-              {/* Subtle hover glow */}
               <div className="absolute inset-0 bg-accentLime/40 blur-2xl rounded-full opacity-0 group-hover/logo:opacity-100 transition-opacity duration-1000 -z-0 scale-150"></div>
             </div>
           ))}

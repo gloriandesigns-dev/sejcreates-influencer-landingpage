@@ -2,8 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const Footer = () => {
+  const mailtoLink = "mailto:team@sejcurates.com?subject=I%20would%20love%20to%20collaborate&body=Hey%20Sejal%2C%20I%20would%20love%20to%20collaborate%20with%20you.";
+
   return (
-    <footer className="bg-black text-white pt-24 md:pt-32 pb-8 px-6 md:px-12 lg:px-24">
+    <footer className="bg-black text-white pt-24 pb-8 px-6 md:px-12 lg:px-24">
       <div className="max-w-7xl mx-auto">
         
         {/* Top Section */}
@@ -13,12 +15,11 @@ const Footer = () => {
           </h2>
           <div className="relative inline-block">
             <a 
-              href="mailto:team@sejcurates.com" 
+              href={mailtoLink} 
               className="text-4xl md:text-5xl lg:text-6xl font-sans text-gray-400 hover:text-white transition-colors duration-500 tracking-tight"
             >
               team@sejcurates.com
             </a>
-            {/* Custom Squiggly Underline matching the reference with draw animation */}
             <svg 
               className="absolute -bottom-4 md:-bottom-6 left-0 w-[80%] md:w-[90%] h-3 md:h-4 text-accentPink" 
               viewBox="0 0 400 12" 
@@ -73,10 +74,8 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Divider */}
         <div className="w-full h-px bg-white/10 mb-6"></div>
 
-        {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0 text-[11px] text-gray-500 font-medium">
           <div>
             W/ <span className="text-accentPink">❤️</span> by <a href="#" className="text-gray-400 hover:text-white transition-colors">Sejcurates.com</a>. Powered by <a href="#" className="text-gray-400 hover:text-white transition-colors">Dualite</a>
