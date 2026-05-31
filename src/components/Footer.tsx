@@ -5,18 +5,18 @@ const Footer = () => {
   const mailtoLink = "mailto:team@sejcurates.com?subject=I%20would%20love%20to%20collaborate&body=Hey%20Sejal%2C%20I%20would%20love%20to%20collaborate%20with%20you.";
 
   return (
-    <footer className="bg-black text-white pt-24 pb-8 px-6 md:px-12 lg:px-24">
+    <footer className="bg-black text-white pt-24 pb-8 px-6 md:px-12 lg:px-24 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
         {/* Top Section */}
         <div className="mb-24 md:mb-32">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-sans font-medium text-white mb-2 md:mb-4 tracking-tight">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-sans font-medium text-white mb-2 md:mb-4 tracking-tight uppercase">
             Let's get to know each other
           </h2>
-          <div className="relative inline-block">
+          <div className="relative inline-block w-full">
             <a 
               href={mailtoLink} 
-              className="text-4xl md:text-5xl lg:text-6xl font-sans text-gray-400 hover:text-white transition-colors duration-500 tracking-tight"
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-sans text-gray-400 hover:text-white transition-colors duration-500 tracking-tight break-words block"
             >
               team@sejcurates.com
             </a>
@@ -44,7 +44,7 @@ const Footer = () => {
         {/* Middle Section: Media Inquiries Only */}
         <div className="mb-16">
           <div>
-            <h4 className="text-xs font-semibold text-gray-400 mb-6 tracking-wide">Media Inquiries</h4>
+            <h4 className="text-xs font-semibold text-gray-400 mb-6 tracking-wide uppercase">Media Inquiries</h4>
             <div className="flex items-center gap-5">
               <a href="#" className="text-white hover:text-accentPink transition-colors">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -76,7 +76,7 @@ const Footer = () => {
 
         <div className="w-full h-px bg-white/10 mb-6"></div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0 text-[11px] text-gray-500 font-medium">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0 text-[11px] text-gray-500 font-medium uppercase">
           <div>
             W/ <span className="text-accentPink">❤️</span> by <a href="#" className="text-gray-400 hover:text-white transition-colors">Sejcurates.com</a>. Powered by <a href="#" className="text-gray-400 hover:text-white transition-colors">Dualite</a>
           </div>

@@ -28,19 +28,19 @@ const reelsData = [
   },
   { 
     title: "Creator Economy", 
-    video: "https://www.dropbox.com/scl/fi/eof2snsyea2ybv7bzogwv/sejcurates_1777986433_3890349026798794637_71849440928.mp4?rlkey=56eh6sz8vudnp90y5n6w6mj85&st=q950adbp&raw=1"
+    video: "https://www.dropbox.com/scl/fi/eof2snsyea2ybv7bzogwv/sejcurates_1777986433_3890349026798794637_71849440928.raw=1"
   },
   { 
     title: "Digital Ecosystems", 
-    video: "https://www.dropbox.com/scl/fi/v3t68ttmol2i8sa4rdnwg/sejcurates_1770212710_3825139871342134124_71849440928.mp4?rlkey=4mdg6fn7q8aso6jymqst7nmnn&st=d2dorznh&raw=1"
+    video: "https://www.dropbox.com/scl/fi/v3t68ttmol2i8sa4rdnwg/sejcurates_1770212710_3825139871342134124_71849440928.raw=1"
   },
   { 
     title: "Modern Business", 
-    video: "https://www.dropbox.com/scl/fi/y0k1b7x9oxbzmkg3vheui/sejcurates_1759931266_3738891360318036890_71849440928.mp4?rlkey=2l9y2vv7xyurct98wrlu9g6kk&st=6upensne&raw=1"
+    video: "https://www.dropbox.com/scl/fi/y0k1b7x9oxbzmkg3vheui/sejcurates_1759931266_3738891360318036890_71849440928.raw=1"
   },
   { 
     title: "Strategic Thinking", 
-    video: "https://www.dropbox.com/scl/fi/r582abu9d37e9ltb0eift/sejcurates_1778159040_3891800077154469281_71849440928.mp4?rlkey=pbvt92ge36xlx8lisu58zq09j&st=49yxmi91&raw=1"
+    video: "https://www.dropbox.com/scl/fi/r582abu9d37e9ltb0eift/sejcurates_1778159040_3891800077154469281_71849440928.raw=1"
   }
 ];
 
@@ -90,7 +90,7 @@ const ReelsTicker = () => {
   const tickerItems = [...reelsData, ...reelsData];
 
   return (
-    <section className="py-16 bg-primary overflow-hidden">
+    <section id="reels-ticker-section" className="py-16 bg-primary overflow-hidden scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 mb-12">
         <motion.p 
           initial={{ opacity: 0 }}
@@ -117,7 +117,7 @@ const ReelsTicker = () => {
               transition={{ duration: 0.8, delay: 0.5, ease: [0.25, 1, 0.5, 1] }}
             ></motion.span>
             content
-          </span>.
+          </span>
         </motion.h2>
       </div>
 

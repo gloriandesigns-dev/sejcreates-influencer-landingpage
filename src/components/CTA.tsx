@@ -1,8 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import ConnectModal from './ConnectModal';
 
 const CTA = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(-1000);
   const mouseY = useMotionValue(-1000);
@@ -26,6 +28,8 @@ const CTA = () => {
 
   return (
     <section className="px-4 md:px-8 lg:px-12 pb-16 bg-primary">
+      <ConnectModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      
       <motion.div 
         ref={cardRef}
         onMouseMove={handleMouseMove}
@@ -60,14 +64,14 @@ const CTA = () => {
             Whether it's brand storytelling, D2C strategy, creator collaborations, or internet-first campaigns - let's create perspectives that people remember.
           </p>
           
-          <a 
-            href="mailto:team@sejcurates.com?subject=I%20would%20love%20to%20collaborate&body=Hey%20Sejal%2C%20I%20would%20love%20to%20collaborate%20with%20you." 
+          <button 
+            onClick={() => setIsModalOpen(true)}
             className="flex items-center gap-2 text-sm md:text-base uppercase tracking-[0.2em] font-medium text-textMain hover:text-accentPink transition-colors duration-500 relative group/btn"
           >
             Let's Talk <ArrowUpRight size={18} className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-500" />
             <span className="absolute -bottom-3 left-0 w-full h-[1px] bg-black/10 group-hover/btn:bg-accentPink transition-colors duration-500"></span>
             <span className="absolute -bottom-3 left-0 w-full h-[1px] bg-accentPink blur-[4px] opacity-0 group-hover/btn:opacity-50 transition-opacity duration-500"></span>
-          </a>
+          </button>
         </div>
       </motion.div>
     </section>

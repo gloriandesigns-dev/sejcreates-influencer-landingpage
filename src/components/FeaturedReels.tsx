@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
-import { motion } from 'framer-motion';
-import { Play } from 'lucide-react';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Play, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const featuredData = [
   {
@@ -25,15 +25,13 @@ const featuredData = [
   }
 ];
 
-const FeaturedCard = ({ item, idx }: { item: typeof featuredData[0], idx: number }) => {
+const FeaturedCard = ({ item, index }: { item: typeof featuredData[0], index: number }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   
   const handleMouseEnter = () => {
     if (videoRef.current) {
       videoRef.current.muted = false;
-      videoRef.current.play().catch((error) => {
-        console.warn("Video playback or unmuting failed on hover/touch:", error);
-      });
+      videoRef.current.play().catch(() => {});
     }
   };
   
@@ -49,107 +47,109 @@ const FeaturedCard = ({ item, idx }: { item: typeof featuredData[0], idx: number
       href={item.link}
       target="_blank"
       rel="noopener noreferrer"
-      initial="hidden"
-      whileInView="visible"
+      initial={{ opacity: 0, x: 50 }}
+      whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      variants={{
-        hidden: { opacity: 0, y: 50, filter: 'blur(10px)' },
-        visible: { 
-          opacity: 1, 
-          y: 0, 
-          filter: 'blur(0px)',
-          transition: { duration: 1.5, delay: idx * 0.15, ease: [0.25, 1, 0.5, 1] } 
-        }
-      }}
-      className="group cursor-pointer flex flex-col gap-4 block"
+      transition={{ duration: 1.2, delay: index * 0.1, ease: [0.25, 1, 0.5, 1] }}
+      className="group cursor-pointer flex flex-col gap-4"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onTouchStart={handleMouseEnter}
       onTouchEnd={handleMouseLeave}
-      onTouchCancel={handleMouseLeave}
     >
-      <div className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden bg-secondary">
+      <div className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden bg-secondary shadow-lg">
         <video 
           ref={videoRef}
           src={item.video} 
           loop
-          muted={true}
+          muted
           playsInline
-          preload="auto"
-          className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-cinematic"
+          className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
         />
         <div className="absolute inset-0 flex items-center justify-center bg-accentPink/0 group-hover:bg-accentPink/20 transition-colors duration-700 pointer-events-none">
-          <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform scale-90 group-hover:scale-100 transition-all duration-700 ease-cinematic">
+          <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform scale-90 group-hover:scale-100 transition-all duration-700">
             <Play size={20} className="ml-1" fill="currentColor" />
           </div>
         </div>
       </div>
-      
-      <div className="flex flex-col px-1">
-        <h3 className="text-base md:text-lg font-display font-light leading-snug group-hover:text-accentPink transition-colors duration-500">
-          {item.title}
-        </h3>
-      </div>
+      <h3 className="text-sm font-display font-light leading-snug group-hover:text-accentPink transition-colors uppercase">
+        {item.title}
+      </h3>
     </motion.a>
   );
 };
 
 const FeaturedReels = () => {
-  const fadeUpVariants = {
-    hidden: { opacity: 0, y: 40, filter: 'blur(10px)' },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      filter: 'blur(0px)',
-      transition: { duration: 1.5, ease: [0.25, 1, 0.5, 1] } 
-    }
-  };
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % featuredData.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <section className="py-20 px-6 md:px-12 lg:px-24 bg-primary text-textMain">
+    <section id="featured-reels-section" className="py-12 md:py-20 px-6 md:px-12 lg:px-24 bg-primary text-textMain scroll-mt-20">
       <div className="max-w-7xl mx-auto">
         
-        <div className="flex flex-col mb-16 gap-4">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeUpVariants}
-            className="max-w-3xl"
-          >
-            <p className="text-[10px] uppercase tracking-[0.2em] text-textMuted mb-6 flex items-center gap-2">
+        <div className="flex flex-col mb-12 gap-4">
+          <motion.div className="max-w-3xl">
+            <p className="text-[10px] uppercase tracking-[0.2em] text-textMuted mb-4 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-accentPink block"></span> FACTORY EXPLORATION FRAMES
             </p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-light tracking-tight mb-6">
+            <h2 className="text-4xl md:text-6xl font-display font-light tracking-tight mb-4 uppercase">
               Where It's Actually Made
             </h2>
-            <p className="text-textMuted font-light leading-relaxed max-w-xl">
-              Exploring factories, warehouses, and workshops, covering the processes and stories behind the products you love!
-            </p>
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        {/* Desktop Grid */}
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-8">
           {featuredData.map((item, idx) => (
-            <FeaturedCard key={idx} item={item} idx={idx} />
+            <FeaturedCard key={idx} item={item} index={idx} />
           ))}
         </div>
 
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={fadeUpVariants}
-          className="mt-20 flex justify-center"
-        >
+        {/* Mobile Carousel - Smooth Fade with Side Arrows */}
+        <div className="md:hidden relative h-[550px] mb-12">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+              className="absolute inset-0"
+            >
+              <FeaturedCard item={featuredData[activeIndex]} index={0} />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Side Arrows */}
+          <button 
+            onClick={() => setActiveIndex((prev) => (prev - 1 + featuredData.length) % featuredData.length)}
+            className="absolute -left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-accentLime flex items-center justify-center z-20 shadow-lg border border-white/40"
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <button 
+            onClick={() => setActiveIndex((prev) => (prev + 1) % featuredData.length)}
+            className="absolute -right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-accentLime flex items-center justify-center z-20 shadow-lg border border-white/40"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+
+        <motion.div className="mt-8 flex justify-center">
           <a 
-            href="mailto:team@sejcurates.com?subject=I%20would%20love%20to%20collaborate&body=Hey%20Sejal%2C%20I%20would%20love%20to%20collaborate%20with%20you." 
-            className="relative overflow-hidden bg-accentPink text-white px-10 py-5 font-medium uppercase tracking-widest text-sm group rounded-full border border-transparent group-hover:border-accentPink transition-colors duration-500"
+            href="mailto:team@sejcurates.com?subject=Collaborate%20for%20Factory%20Visits" 
+            className="relative overflow-hidden bg-accentPink text-white px-10 py-5 font-medium uppercase tracking-widest text-xs group rounded-full border border-accentPink hover:border-accentPink transition-all duration-500 w-full md:w-auto text-center flex items-center justify-center shadow-lg"
           >
             <span className="relative z-10 group-hover:text-accentPink transition-colors duration-500">
-              Collaborate with me
+              Collaborate for Factory Visits
             </span>
-            <div className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-cinematic origin-left rounded-full"></div>
+            <div className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-cinematic origin-left"></div>
           </a>
         </motion.div>
 

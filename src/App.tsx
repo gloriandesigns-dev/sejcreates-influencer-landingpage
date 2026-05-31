@@ -5,7 +5,7 @@ import Experience from './components/Experience';
 import BrandsTicker from './components/BrandsTicker';
 import ReelsTicker from './components/ReelsTicker';
 import FeaturedReels from './components/FeaturedReels';
-import Insights from './components/Insights';
+import Recognition from './components/Recognition';
 import PhilosophyDivider from './components/PhilosophyDivider';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
@@ -19,7 +19,8 @@ function App() {
       <Experience />
       <BrandsTicker />
       <FeaturedReels />
-      <Insights />
+      {/* Insights hidden for now as per request */}
+      <Recognition />
       <PhilosophyDivider />
       <CTA />
       <Footer />
