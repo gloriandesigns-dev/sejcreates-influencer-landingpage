@@ -384,17 +384,19 @@ const Hero = () => {
           className="hidden lg:block w-[90%] h-auto max-h-[100vh] object-contain object-bottom absolute bottom-0 right-[8%] z-30 pointer-events-none"
         />
         
-        {/* Mobile/Tablet Image - Fixed Centering */}
-        <motion.img 
-          initial={{ scale: 1.1, filter: 'blur(20px)', opacity: 0 }}
-          animate={{ scale: 1, filter: 'blur(0px)', opacity: 1 }}
-          transition={{ duration: 2.8, ease: [0.25, 1, 0.5, 1] }}
-          src="https://www.dropbox.com/scl/fi/w5vlehlw94lqa7fei2fpl/mlgyopbirnyidourb9pm-1.webp?rlkey=oqmy5zz3s6dleko83pgaoawr2&st=0lo28tp0&raw=1" 
-          alt="Sejcurates Portrait Mobile" 
-          fetchPriority="high"
-          loading="eager"
-          className="block lg:hidden w-full md:w-[95%] h-full object-contain object-bottom absolute bottom-0 left-1/2 -translate-x-1/2 z-30 pointer-events-none"
-        />
+        {/* Mobile/Tablet Image - Fixed Centering and Specific Link */}
+        <div className="block lg:hidden w-full h-full relative flex items-end justify-center overflow-hidden">
+          <motion.img 
+            initial={{ scale: 1.1, filter: 'blur(20px)', opacity: 0 }}
+            animate={{ scale: 1, filter: 'blur(0px)', opacity: 1 }}
+            transition={{ duration: 2.8, ease: [0.25, 1, 0.5, 1] }}
+            src="https://www.dropbox.com/scl/fi/w5vlehlw94lqa7fei2fpl/mlgyopbirnyidourb9pm-1.webp?rlkey=oqmy5zz3s6dleko83pgaoawr2&st=0lo28tp0&raw=1" 
+            alt="Sejcurates Portrait Mobile" 
+            fetchPriority="high"
+            loading="eager"
+            className="w-full md:w-[95%] h-full object-contain object-bottom relative z-30 pointer-events-none mx-auto"
+          />
+        </div>
       </div>
     </section>
   );
