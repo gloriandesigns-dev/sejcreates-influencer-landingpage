@@ -28,7 +28,7 @@ const About = () => {
   }, []);
 
   return (
-    <section id="about-section" className="py-16 px-4 md:px-8 lg:px-12 bg-primary scroll-mt-20">
+    <section id="about-section" className="py-12 px-4 md:px-8 lg:px-12 bg-primary scroll-mt-20">
       <div className="max-w-7xl mx-auto">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
@@ -40,7 +40,7 @@ const About = () => {
             transition={{ duration: 1.2, ease: "easeOut" }}
             className="lg:col-span-4 flex flex-col justify-center"
           >
-            <h2 className="text-3xl font-display mb-6 text-textMain uppercase">About Me</h2>
+            <h2 className="text-3xl font-display mb-6 text-textMain">About Me</h2>
             <p className="text-textMuted leading-relaxed font-light">
               Strategy by day. Stories always. I'm a London Business School graduate and digital strategist who creates content around D2C brands, consumer psychology, AI, and internet culture.
             </p>
@@ -58,12 +58,13 @@ const About = () => {
               <img 
                 src="https://www.dropbox.com/scl/fi/hakye6glc6xfsk2pl1g3u/IMG_9211.webp?rlkey=1udpr1eojrhi5mip5m2nvmtge&st=mqjv1tkn&raw=1" 
                 alt="Sejal" 
+                loading="lazy"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
               />
             </div>
             
             <div className="bg-accentLime p-8 rounded-2xl border border-accentPink/10">
-              <p className="text-sm text-textMain leading-relaxed font-medium uppercase">
+              <p className="text-sm text-textMain leading-relaxed font-medium">
                 Because one perspective can change how you grow, and that growth creates impact. Reading, learning, and creating has genuinely changed how I see the world.
               </p>
             </div>
@@ -73,7 +74,7 @@ const About = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               className="bg-accentPink p-6 rounded-2xl text-center shadow-lg"
             >
-              <p className="text-white text-sm font-bold uppercase tracking-widest">
+              <p className="text-white text-sm font-bold tracking-widest">
                 Come experience it with me
               </p>
             </motion.div>
@@ -95,7 +96,7 @@ const About = () => {
               ].map((text, i) => (
                 <div key={i} className="flex gap-4">
                   <Plus className="shrink-0 mt-1 text-accentPink" size={16} />
-                  <p className="text-sm text-textMuted leading-relaxed uppercase">{text}</p>
+                  <p className="text-sm text-textMuted leading-relaxed">{text}</p>
                 </div>
               ))}
             </div>
@@ -114,9 +115,9 @@ const About = () => {
               className="rounded-2xl overflow-hidden relative group h-[320px] transition-all duration-700 w-full"
             >
               {item.type === 'video' ? (
-                <video src={item.src} autoPlay loop muted playsInline className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-1000" />
+                <video src={item.src} autoPlay loop muted playsInline preload="metadata" className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-1000" />
               ) : (
-                <img src={item.src} alt="Visual" className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-1000" />
+                <img src={item.src} alt="Visual" loading="lazy" className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-1000" />
               )}
             </motion.div>
           ))}
@@ -134,9 +135,9 @@ const About = () => {
               className="absolute inset-0 rounded-2xl overflow-hidden shadow-xl"
             >
               {visuals[activeIndex].type === 'video' ? (
-                <video src={visuals[activeIndex].src} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+                <video src={visuals[activeIndex].src} autoPlay loop muted playsInline preload="metadata" className="w-full h-full object-cover" />
               ) : (
-                <img src={visuals[activeIndex].src} alt="Visual" className="w-full h-full object-cover" />
+                <img src={visuals[activeIndex].src} alt="Visual" loading="lazy" className="w-full h-full object-cover" />
               )}
             </motion.div>
           </AnimatePresence>

@@ -47,7 +47,7 @@ const FeaturedCard = ({ item, index }: { item: typeof featuredData[0], index: nu
       href={item.link}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, x: 50 }}
+      initial={{ opacity: 0, x: 100 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 1.2, delay: index * 0.1, ease: [0.25, 1, 0.5, 1] }}
@@ -64,6 +64,7 @@ const FeaturedCard = ({ item, index }: { item: typeof featuredData[0], index: nu
           loop
           muted
           playsInline
+          preload="metadata"
           className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
         />
         <div className="absolute inset-0 flex items-center justify-center bg-accentPink/0 group-hover:bg-accentPink/20 transition-colors duration-700 pointer-events-none">
@@ -72,7 +73,7 @@ const FeaturedCard = ({ item, index }: { item: typeof featuredData[0], index: nu
           </div>
         </div>
       </div>
-      <h3 className="text-sm font-display font-light leading-snug group-hover:text-accentPink transition-colors uppercase">
+      <h3 className="text-sm font-display font-light leading-snug group-hover:text-accentPink transition-colors">
         {item.title}
       </h3>
     </motion.a>
@@ -90,28 +91,26 @@ const FeaturedReels = () => {
   }, []);
 
   return (
-    <section id="featured-reels-section" className="py-12 md:py-20 px-6 md:px-12 lg:px-24 bg-primary text-textMain scroll-mt-20">
+    <section id="featured-reels-section" className="py-8 md:py-12 px-6 md:px-12 lg:px-24 bg-primary text-textMain scroll-mt-20 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
-        <div className="flex flex-col mb-12 gap-4">
+        <div className="flex flex-col mb-10 gap-4">
           <motion.div className="max-w-3xl">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-textMuted mb-4 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-accentPink block"></span> FACTORY EXPLORATION FRAMES
+            <p className="text-[10px] tracking-[0.2em] text-textMuted mb-4 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-accentPink block"></span> Factory and founder Collaborations
             </p>
-            <h2 className="text-4xl md:text-6xl font-display font-light tracking-tight mb-4 uppercase">
-              Where It's Actually Made
+            <h2 className="text-4xl md:text-6xl font-display font-light tracking-tight mb-4">
+              Factory and founder Collaborations
             </h2>
           </motion.div>
         </div>
 
-        {/* Desktop Grid */}
         <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-8">
           {featuredData.map((item, idx) => (
             <FeaturedCard key={idx} item={item} index={idx} />
           ))}
         </div>
 
-        {/* Mobile Carousel - Smooth Fade with Side Arrows */}
         <div className="md:hidden relative h-[550px] mb-12">
           <AnimatePresence mode="wait">
             <motion.div
@@ -126,7 +125,6 @@ const FeaturedReels = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* Side Arrows */}
           <button 
             onClick={() => setActiveIndex((prev) => (prev - 1 + featuredData.length) % featuredData.length)}
             className="absolute -left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-accentLime flex items-center justify-center z-20 shadow-lg border border-white/40"
@@ -144,7 +142,7 @@ const FeaturedReels = () => {
         <motion.div className="mt-8 flex justify-center">
           <a 
             href="mailto:team@sejcurates.com?subject=Collaborate%20for%20Factory%20Visits" 
-            className="relative overflow-hidden bg-accentPink text-white px-10 py-5 font-medium uppercase tracking-widest text-xs group rounded-full border border-accentPink hover:border-accentPink transition-all duration-500 w-full md:w-auto text-center flex items-center justify-center shadow-lg"
+            className="relative overflow-hidden bg-accentPink text-white px-10 py-5 font-medium tracking-widest text-xs group rounded-full border border-accentPink hover:border-accentPink transition-all duration-500 w-full md:w-auto text-center flex items-center justify-center shadow-lg"
           >
             <span className="relative z-10 group-hover:text-accentPink transition-colors duration-500">
               Collaborate for Factory Visits

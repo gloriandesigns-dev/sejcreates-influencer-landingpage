@@ -16,8 +16,8 @@ const BrandsTicker = () => {
   const tickerItems = [...brands, ...brands, ...brands, ...brands];
 
   return (
-    <section className="pt-4 pb-12 bg-primary overflow-hidden border-b border-borderSoft/50">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 mb-8">
+    <section className="pt-2 pb-10 bg-primary overflow-hidden border-b border-borderSoft/50">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 mb-6">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -27,8 +27,8 @@ const BrandsTicker = () => {
           <p className="text-[10px] uppercase tracking-[0.2em] text-textMuted mb-3 flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-accentPink block"></span> Worked With
           </p>
-          <h2 className="text-2xl md:text-3xl font-display font-light text-textMain uppercase whitespace-nowrap overflow-hidden text-ellipsis">
-            Brands, institutions, and ecosystems.
+          <h2 className="text-2xl md:text-3xl font-display font-light text-textMain whitespace-nowrap overflow-hidden text-ellipsis">
+            Brand collaborations
           </h2>
         </motion.div>
       </div>
@@ -49,6 +49,7 @@ const BrandsTicker = () => {
               <img 
                 src={brand} 
                 alt="Brand Logo" 
+                loading="lazy"
                 className="h-10 md:h-14 w-auto object-contain opacity-40 group-hover/logo:opacity-100 transition-all duration-1000 relative z-10" 
               />
               <div className="absolute inset-0 bg-accentLime/40 blur-2xl rounded-full opacity-0 group-hover/logo:opacity-100 transition-opacity duration-1000 -z-0 scale-150"></div>

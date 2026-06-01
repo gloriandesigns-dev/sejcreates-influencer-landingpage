@@ -52,7 +52,7 @@ const ConnectModal = ({ isOpen, onClose }: ConnectModalProps) => {
             </button>
 
             <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-display font-light tracking-tight text-textMain uppercase">
+              <h2 className="text-4xl md:text-5xl font-display font-light tracking-tight text-textMain">
                 Connect for
               </h2>
             </div>
@@ -70,7 +70,7 @@ const ConnectModal = ({ isOpen, onClose }: ConnectModalProps) => {
                   <div className="p-4 bg-accentLime/40 rounded-2xl group-hover:scale-110 transition-transform backdrop-blur-md">
                     {opt.icon}
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-center leading-tight">
+                  <span className="text-[10px] font-bold tracking-[0.2em] text-center leading-tight">
                     {opt.title}
                   </span>
                 </motion.a>

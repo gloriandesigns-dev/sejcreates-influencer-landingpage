@@ -5,12 +5,12 @@ const Footer = () => {
   const mailtoLink = "mailto:team@sejcurates.com?subject=I%20would%20love%20to%20collaborate&body=Hey%20Sejal%2C%20I%20would%20love%20to%20collaborate%20with%20you.";
 
   return (
-    <footer className="bg-black text-white pt-24 pb-8 px-6 md:px-12 lg:px-24 overflow-hidden">
+    <footer className="bg-black text-white pt-16 pb-8 px-6 md:px-12 lg:px-24 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
         {/* Top Section */}
-        <div className="mb-24 md:mb-32">
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-sans font-medium text-white mb-2 md:mb-4 tracking-tight uppercase">
+        <div className="mb-16 md:mb-24">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-sans font-medium text-white mb-2 md:mb-4 tracking-tight">
             Let's get to know each other
           </h2>
           <div className="relative inline-block w-full">
@@ -42,7 +42,7 @@ const Footer = () => {
         </div>
 
         {/* Middle Section: Media Inquiries Only */}
-        <div className="mb-16">
+        <div className="mb-12">
           <div>
             <h4 className="text-xs font-semibold text-gray-400 mb-6 tracking-wide uppercase">Media Inquiries</h4>
             <div className="flex items-center gap-5">

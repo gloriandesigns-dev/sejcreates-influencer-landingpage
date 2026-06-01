@@ -3,8 +3,7 @@ import { motion } from 'framer-motion';
 
 const Recognition = () => {
   return (
-    <section id="recognition-section" className="py-16 px-6 md:px-12 lg:px-24 bg-primary overflow-hidden relative scroll-mt-20">
-      {/* Fading Grid Background - Middle Visibility Only */}
+    <section id="recognition-section" className="py-6 md:py-8 px-6 md:px-12 lg:px-24 bg-primary overflow-hidden relative scroll-mt-20">
       <div className="absolute inset-0 pointer-events-none z-0">
         <div 
           className="absolute inset-0 opacity-[0.08]" 
@@ -30,6 +29,8 @@ const Recognition = () => {
               <img 
                 src="https://www.dropbox.com/scl/fi/54a182hwhdgnje48k8o3p/IMG_9210.webp?rlkey=4j7wo1klmye2hfed2sya68d0x&st=y64ut4pu&raw=1" 
                 alt="Recognition Award" 
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
@@ -42,14 +43,14 @@ const Recognition = () => {
             viewport={{ once: true }}
             transition={{ duration: 1.2, delay: 0.3 }}
           >
-            <p className="text-[10px] uppercase tracking-[0.3em] text-textMuted mb-6 flex items-center gap-2">
+            <p className="text-[10px] tracking-[0.3em] text-textMuted mb-6 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-accentPink block"></span> Recognition
             </p>
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-light tracking-tight mb-8 leading-tight uppercase">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-light tracking-tight mb-8 leading-tight">
               A Voice That Resonates
             </h2>
             <div className="bg-accentLime/20 border-l-4 border-accentLime p-8 rounded-r-2xl backdrop-blur-sm">
-              <p className="text-xl md:text-2xl font-display font-light text-textMain leading-relaxed italic uppercase">
+              <p className="text-xl md:text-2xl font-display font-light text-textMain leading-relaxed italic">
                 "Fresh Voice in Digital Content awarded by Navbharat Digital & Navrashtra"
               </p>
             </div>

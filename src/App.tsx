@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Experience from './components/Experience';
@@ -13,17 +14,20 @@ import Footer from './components/Footer';
 function App() {
   return (
     <main className="bg-primary min-h-screen font-sans text-textMain overflow-x-hidden">
-      <Hero />
-      <About />
-      <ReelsTicker />
-      <Experience />
-      <BrandsTicker />
-      <FeaturedReels />
-      {/* Insights hidden for now as per request */}
-      <Recognition />
-      <PhilosophyDivider />
-      <CTA />
-      <Footer />
+      <Navbar />
+      <div className="relative">
+        <Hero />
+        <About />
+        <ReelsTicker />
+        <Experience />
+        <BrandsTicker />
+        <FeaturedReels />
+        {/* Insights hidden for now as per request */}
+        <Recognition />
+        <PhilosophyDivider />
+        <CTA />
+        <Footer />
+      </div>
     </main>
   );
 }

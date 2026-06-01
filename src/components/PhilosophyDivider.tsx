@@ -13,11 +13,11 @@ const PhilosophyDivider = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 2, ease: [0.25, 1, 0.5, 1] }}
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-light leading-relaxed text-textMain mb-12 uppercase">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-light leading-relaxed text-textMain mb-12">
             “From competing in sports to presenting at business school, from corporate boardrooms to creating content. I've never stopped being a student.”
           </h2>
           
-          <p className="text-xs md:text-sm text-accentPink font-bold uppercase tracking-[0.3em]">
+          <p className="text-xs md:text-sm text-accentPink font-bold tracking-[0.3em]">
             Just growing and building perspectives, one story at a time :)
           </p>
         </motion.div>
