@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import ConnectModal from './ConnectModal';
@@ -51,86 +51,133 @@ const experiences = [
 const Experience = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const resumeTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const startAutoPlay = () => {
+    if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
+    autoPlayTimerRef.current = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % experiences.length);
+    }, 3000);
+  };
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    if (isAutoPlaying) {
+      startAutoPlay();
+    } else {
+      if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
+    }
+    return () => {
+      if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
+    };
+  }, [isAutoPlaying]);
+
+  const handleManualNav = (direction: 'prev' | 'next') => {
+    setIsAutoPlaying(false);
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+    
+    if (direction === 'prev') {
+      setActiveIndex((prev) => (prev - 1 + experiences.length) % experiences.length);
+    } else {
       setActiveIndex((prev) => (prev + 1) % experiences.length);
-    }, 1500);
-    return () => clearInterval(timer);
-  }, []);
+    }
+
+    resumeTimerRef.current = setTimeout(() => {
+      setIsAutoPlaying(true);
+    }, 60000); // Resume after 1 minute
+  };
 
   return (
-    <section id="experience-section" className="py-10 md:py-16 px-6 md:px-12 lg:px-24 bg-primary text-textMain scroll-mt-20">
+    <section id="experience-section" className="pt-12 pb-24 md:pt-16 md:pb-32 px-6 md:px-12 lg:px-24 bg-primary text-textMain scroll-mt-20 overflow-hidden">
       <ConnectModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       
       <div className="max-w-7xl mx-auto">
-        <header className="flex flex-col md:flex-row justify-between items-start mb-10 gap-8">
-          <motion.div className="md:w-1/2">
-            <p className="text-[10px] tracking-[0.2em] text-textMuted mb-4 flex items-center gap-2">
+        <header className="flex flex-col md:flex-row justify-between items-start mb-16 gap-8">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            className="md:w-1/2"
+          >
+            <p className="text-[10px] tracking-[0.3em] text-textMuted mb-4 flex items-center gap-2 uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-accentPink block"></span> Experiences
             </p>
-            <h2 className="text-4xl md:text-5xl font-display font-light tracking-tight">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-light tracking-tight leading-tight">
               Digital and content strategy
             </h2>
           </motion.div>
           
           <button 
             onClick={() => setIsModalOpen(true)}
-            className="hidden md:flex items-center gap-1 text-xs tracking-[0.2em] font-medium hover:text-accentPink transition-colors group relative"
+            className="hidden md:flex items-center gap-2 text-[10px] tracking-[0.25em] font-bold uppercase hover:text-accentPink transition-all duration-700 group relative"
           >
-            Book A Call <ArrowUpRight size={14} />
+            Book A Call <ArrowUpRight size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-500" />
             <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-accentPink group-hover:w-full transition-all duration-700"></span>
           </button>
         </header>
 
-        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Desktop Grid */}
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-8">
           {experiences.map((exp, idx) => (
-            <div key={idx} className="p-8 bg-white border border-accentPink/30 rounded-2xl flex flex-col hover:border-accentPink transition-all duration-700 group shadow-sm">
-              <h3 className="text-xl font-display mb-1">{exp.organization}</h3>
-              <p className="text-[9px] tracking-widest text-textMuted mb-6">{exp.timeline}</p>
-              <p className="text-xs text-textMuted font-light leading-relaxed mb-6">{exp.description}</p>
-              <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-accentPink/10">
+            <motion.div 
+              key={idx} 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="p-10 bg-white border border-accentPink/10 rounded-[2rem] flex flex-col hover:border-accentPink/40 transition-all duration-1000 group shadow-[0_4px_20px_rgba(0,0,0,0.02)]"
+            >
+              <h3 className="text-2xl font-display mb-2 text-textMain">{exp.organization}</h3>
+              <p className="text-[9px] tracking-[0.2em] text-accentPink mb-8 uppercase font-bold">{exp.timeline}</p>
+              <p className="text-sm text-textMuted font-light leading-relaxed mb-8">{exp.description}</p>
+              <div className="flex flex-wrap gap-2 mt-auto pt-6 border-t border-accentPink/5">
                 {exp.tags.map((tag, i) => (
-                  <span key={i} className="px-3 py-1 rounded-full border border-accentPink/20 text-[8px] tracking-widest text-accentPink">{tag}</span>
+                  <span key={i} className="px-3 py-1 rounded-full border border-accentPink/10 text-[8px] tracking-widest text-textMuted uppercase font-medium">{tag}</span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        <div className="md:hidden relative h-[450px]">
+        {/* Mobile Carousel */}
+        <div className="md:hidden relative h-[520px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="absolute inset-0 p-8 bg-white border border-accentPink/30 rounded-2xl flex flex-col shadow-xl"
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute inset-0 p-10 bg-white border border-accentPink/10 rounded-[2rem] flex flex-col shadow-xl"
             >
               <h3 className="text-2xl font-display mb-2">{experiences[activeIndex].organization}</h3>
-              <p className="text-[10px] tracking-widest text-textMuted mb-8">{experiences[activeIndex].timeline}</p>
-              <p className="text-sm text-textMuted font-light leading-relaxed mb-8">{experiences[activeIndex].description}</p>
+              <p className="text-[10px] tracking-[0.2em] text-accentPink mb-8 uppercase font-bold">{experiences[activeIndex].timeline}</p>
+              <p className="text-base text-textMuted font-light leading-relaxed mb-8">{experiences[activeIndex].description}</p>
               <div className="flex flex-wrap gap-2 mt-auto">
                 {experiences[activeIndex].tags.map((tag, i) => (
-                  <span key={i} className="px-3 py-1 rounded-full border border-accentPink/20 text-[9px] tracking-widest text-accentPink">{tag}</span>
+                  <span key={i} className="px-3 py-1 rounded-full border border-accentPink/10 text-[9px] tracking-widest text-textMuted uppercase font-medium">{tag}</span>
                 ))}
               </div>
             </motion.div>
           </AnimatePresence>
 
-          <button 
-            onClick={() => setActiveIndex((prev) => (prev - 1 + experiences.length) % experiences.length)}
-            className="absolute -left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-accentLime flex items-center justify-center z-20 shadow-lg border border-white/40"
-          >
-            <ChevronLeft size={20} />
-          </button>
-          <button 
-            onClick={() => setActiveIndex((prev) => (prev + 1) % experiences.length)}
-            className="absolute -right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-accentLime flex items-center justify-center z-20 shadow-lg border border-white/40"
-          >
-            <ChevronRight size={20} />
-          </button>
+          {/* Bottom Navigation Arrows */}
+          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex gap-6 z-20">
+            <button 
+              onClick={() => handleManualNav('prev')}
+              className="w-12 h-12 rounded-full bg-white border border-accentPink/10 flex items-center justify-center shadow-lg active:scale-90 transition-transform"
+            >
+              <ChevronLeft size={20} className="text-textMain" />
+            </button>
+            <button 
+              onClick={() => handleManualNav('next')}
+              className="w-12 h-12 rounded-full bg-white border border-accentPink/10 flex items-center justify-center shadow-lg active:scale-90 transition-transform"
+            >
+              <ChevronRight size={20} className="text-textMain" />
+            </button>
+          </div>
         </div>
       </div>
     </section>

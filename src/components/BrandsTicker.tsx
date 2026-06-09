@@ -16,18 +16,18 @@ const BrandsTicker = () => {
   const tickerItems = [...brands, ...brands, ...brands, ...brands];
 
   return (
-    <section className="pt-2 pb-10 bg-primary overflow-hidden border-b border-borderSoft/50">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 mb-6">
+    <section className="pt-16 pb-24 md:pt-24 md:pb-32 bg-primary overflow-hidden border-b border-borderSoft/30">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 mb-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }}
+          transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="text-[10px] uppercase tracking-[0.2em] text-textMuted mb-3 flex items-center gap-2">
+          <p className="text-[10px] uppercase tracking-[0.3em] text-textMuted mb-3 flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-accentPink block"></span> Worked With
           </p>
-          <h2 className="text-2xl md:text-3xl font-display font-light text-textMain whitespace-nowrap overflow-hidden text-ellipsis">
+          <h2 className="text-2xl md:text-3xl font-display font-light text-textMain tracking-tight">
             Brand collaborations
           </h2>
         </motion.div>
@@ -35,11 +35,11 @@ const BrandsTicker = () => {
 
       <div className="relative w-full flex overflow-hidden group">
         <motion.div 
-          className="flex items-center gap-24 md:gap-40 px-12"
+          className="flex items-center gap-20 md:gap-40 px-12"
           animate={{ x: ["0%", "-50%"] }}
           transition={{ 
             ease: "linear", 
-            duration: 15,
+            duration: 25,
             repeat: Infinity,
           }}
           style={{ width: "max-content" }}
@@ -50,9 +50,10 @@ const BrandsTicker = () => {
                 src={brand} 
                 alt="Brand Logo" 
                 loading="lazy"
-                className="h-10 md:h-14 w-auto object-contain opacity-40 group-hover/logo:opacity-100 transition-all duration-1000 relative z-10" 
+                decoding="async"
+                className="h-10 md:h-12 w-auto object-contain opacity-30 group-hover/logo:opacity-100 transition-all duration-[2000ms] ease-cinematic relative z-10" 
               />
-              <div className="absolute inset-0 bg-accentLime/40 blur-2xl rounded-full opacity-0 group-hover/logo:opacity-100 transition-opacity duration-1000 -z-0 scale-150"></div>
+              <div className="absolute inset-0 bg-accentLime/30 blur-3xl rounded-full opacity-0 group-hover/logo:opacity-100 transition-opacity duration-[2000ms] -z-0 scale-150"></div>
             </div>
           ))}
         </motion.div>
