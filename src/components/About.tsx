@@ -24,7 +24,7 @@ const About = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % visuals.length);
-    }, 2500); // 2.5s delay
+    }, 2500); // 2.5s cycle
     return () => clearInterval(timer);
   }, []);
 
@@ -128,14 +128,18 @@ const About = () => {
           ))}
         </div>
 
+        {/* Mobile Carousel - Refined for "Instant but Smooth" transitions */}
         <div className="md:hidden relative h-[420px] mt-4 overflow-hidden rounded-3xl">
-          <AnimatePresence mode="wait">
+          <AnimatePresence initial={false} mode="popLayout">
             <motion.div
               key={activeIndex}
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
-              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ 
+                duration: 0.8, 
+                ease: [0.22, 1, 0.36, 1] 
+              }}
               className="absolute inset-0 shadow-xl"
             >
               {visuals[activeIndex].type === 'video' ? (

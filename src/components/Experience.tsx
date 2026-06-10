@@ -53,6 +53,7 @@ const Experience = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const resumeTimerRef.current = null;
   const resumeTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const startAutoPlay = () => {
@@ -127,7 +128,7 @@ const Experience = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="p-6 bg-white border border-accentPink/10 rounded-[2rem] flex flex-col hover:border-accentPink/40 transition-all duration-1000 group shadow-[0_4px_20px_rgba(0,0,0,0.02)] min-h-[360px]"
+              className="p-6 bg-white border border-accentPink/10 rounded-[2rem] flex flex-col hover:border-accentPink/40 transition-all duration-1000 group shadow-[0_4px_20px_rgba(0,0,0,0.02)] min-h-[320px]"
             >
               <h3 className="text-2xl font-display mb-2 text-textMain uppercase">{exp.organization}</h3>
               <p className="text-[9px] tracking-[0.2em] text-accentPink mb-4 uppercase font-bold">{exp.timeline}</p>
@@ -141,8 +142,8 @@ const Experience = () => {
           ))}
         </div>
 
-        {/* Mobile Carousel */}
-        <div className="md:hidden relative h-[420px]">
+        {/* Mobile Carousel - Reduced height to h-[360px] */}
+        <div className="md:hidden relative h-[360px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
@@ -154,10 +155,10 @@ const Experience = () => {
             >
               <h3 className="text-2xl font-display mb-2 uppercase">{experiences[activeIndex].organization}</h3>
               <p className="text-[10px] tracking-[0.2em] text-accentPink mb-4 uppercase font-bold">{experiences[activeIndex].timeline}</p>
-              <p className="text-base text-textMuted font-light leading-relaxed mb-4 line-clamp-6">{experiences[activeIndex].description}</p>
+              <p className="text-sm text-textMuted font-light leading-relaxed mb-4 line-clamp-6">{experiences[activeIndex].description}</p>
               <div className="flex flex-wrap gap-2 mt-auto pt-2">
                 {experiences[activeIndex].tags.map((tag, i) => (
-                  <span key={i} className="px-3 py-1 rounded-full border border-accentPink/10 text-[9px] tracking-widest text-textMuted uppercase font-medium">{tag}</span>
+                  <span key={i} className="px-3 py-1 rounded-full border border-accentPink/10 text-[8px] tracking-widest text-textMuted uppercase font-medium">{tag}</span>
                 ))}
               </div>
             </motion.div>

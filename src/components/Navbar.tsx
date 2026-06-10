@@ -219,6 +219,7 @@ const Navbar = () => {
             </a>
           </div>
           
+          {/* Sejal Capsule - Centered vertically and horizontally */}
           <div className="lg:flex px-4 h-10 rounded-full bg-accentLime flex items-center justify-center shadow-sm">
             <span className="font-display font-bold text-xs uppercase tracking-widest leading-none">Sejal</span>
           </div>
