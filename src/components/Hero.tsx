@@ -3,12 +3,12 @@ import { motion, useInView, animate } from 'framer-motion';
 
 const AnimatedNumber = ({ value, prefix = "", suffix = "", decimals = 0 }: { value: number, prefix?: string, suffix?: string, decimals?: number }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-50px" });
 
   useEffect(() => {
     if (inView && ref.current) {
       const controls = animate(0, value, {
-        duration: 3,
+        duration: 2.5,
         ease: [0.22, 1, 0.36, 1],
         onUpdate(v) {
           if (ref.current) {
@@ -20,12 +20,12 @@ const AnimatedNumber = ({ value, prefix = "", suffix = "", decimals = 0 }: { val
     }
   }, [inView, value, prefix, suffix, decimals]);
 
-  return <span ref={ref} className="tabular-nums">{prefix}0{suffix}</span>;
+  return <span ref={ref} className="tabular-nums">{prefix}{value}{suffix}</span>;
 };
 
 const ScrambleText = ({ text }: { text: string }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-50px" });
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   
   const [initialText] = useState(() => 

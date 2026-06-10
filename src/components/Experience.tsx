@@ -85,7 +85,7 @@ const Experience = () => {
 
     resumeTimerRef.current = setTimeout(() => {
       setIsAutoPlaying(true);
-    }, 60000); // Resume after 1 minute
+    }, 60000);
   };
 
   return (
@@ -104,7 +104,7 @@ const Experience = () => {
             <p className="text-[10px] tracking-[0.3em] text-textMuted mb-4 flex items-center gap-2 uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-accentPink block"></span> Experiences
             </p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-light tracking-tight leading-tight">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-light tracking-tight leading-tight uppercase">
               Digital and content strategy
             </h2>
           </motion.div>
@@ -127,12 +127,12 @@ const Experience = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="p-10 bg-white border border-accentPink/10 rounded-[2rem] flex flex-col hover:border-accentPink/40 transition-all duration-1000 group shadow-[0_4px_20px_rgba(0,0,0,0.02)]"
+              className="p-6 bg-white border border-accentPink/10 rounded-[2rem] flex flex-col hover:border-accentPink/40 transition-all duration-1000 group shadow-[0_4px_20px_rgba(0,0,0,0.02)] min-h-[360px]"
             >
-              <h3 className="text-2xl font-display mb-2 text-textMain">{exp.organization}</h3>
-              <p className="text-[9px] tracking-[0.2em] text-accentPink mb-8 uppercase font-bold">{exp.timeline}</p>
-              <p className="text-sm text-textMuted font-light leading-relaxed mb-8">{exp.description}</p>
-              <div className="flex flex-wrap gap-2 mt-auto pt-6 border-t border-accentPink/5">
+              <h3 className="text-2xl font-display mb-2 text-textMain uppercase">{exp.organization}</h3>
+              <p className="text-[9px] tracking-[0.2em] text-accentPink mb-4 uppercase font-bold">{exp.timeline}</p>
+              <p className="text-sm text-textMuted font-light leading-relaxed mb-4 line-clamp-6">{exp.description}</p>
+              <div className="flex flex-wrap gap-2 mt-auto pt-2 border-t border-accentPink/5">
                 {exp.tags.map((tag, i) => (
                   <span key={i} className="px-3 py-1 rounded-full border border-accentPink/10 text-[8px] tracking-widest text-textMuted uppercase font-medium">{tag}</span>
                 ))}
@@ -142,7 +142,7 @@ const Experience = () => {
         </div>
 
         {/* Mobile Carousel */}
-        <div className="md:hidden relative h-[520px]">
+        <div className="md:hidden relative h-[420px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
@@ -150,12 +150,12 @@ const Experience = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute inset-0 p-10 bg-white border border-accentPink/10 rounded-[2rem] flex flex-col shadow-xl"
+              className="absolute inset-0 p-6 bg-white border border-accentPink/10 rounded-[2rem] flex flex-col shadow-xl"
             >
-              <h3 className="text-2xl font-display mb-2">{experiences[activeIndex].organization}</h3>
-              <p className="text-[10px] tracking-[0.2em] text-accentPink mb-8 uppercase font-bold">{experiences[activeIndex].timeline}</p>
-              <p className="text-base text-textMuted font-light leading-relaxed mb-8">{experiences[activeIndex].description}</p>
-              <div className="flex flex-wrap gap-2 mt-auto">
+              <h3 className="text-2xl font-display mb-2 uppercase">{experiences[activeIndex].organization}</h3>
+              <p className="text-[10px] tracking-[0.2em] text-accentPink mb-4 uppercase font-bold">{experiences[activeIndex].timeline}</p>
+              <p className="text-base text-textMuted font-light leading-relaxed mb-4 line-clamp-6">{experiences[activeIndex].description}</p>
+              <div className="flex flex-wrap gap-2 mt-auto pt-2">
                 {experiences[activeIndex].tags.map((tag, i) => (
                   <span key={i} className="px-3 py-1 rounded-full border border-accentPink/10 text-[9px] tracking-widest text-textMuted uppercase font-medium">{tag}</span>
                 ))}
@@ -179,6 +179,24 @@ const Experience = () => {
             </button>
           </div>
         </div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.5, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-24 flex justify-center"
+        >
+          <a 
+            href="mailto:team@sejcurates.com?subject=Collaborate%20for%20Business%20Consultation" 
+            className="relative overflow-hidden bg-accentLime text-textMain px-12 py-5 font-bold tracking-[0.2em] text-sm md:text-base uppercase group rounded-full border border-accentLime transition-all duration-700 w-full md:w-auto text-center flex items-center justify-center shadow-xl"
+          >
+            <span className="relative z-10 group-hover:text-accentPink transition-colors duration-700 max-w-[180px] md:max-w-none leading-tight text-xs md:text-base">
+              Collaborate for <br className="md:hidden" /> Business Consultation
+            </span>
+            <div className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-cinematic origin-left"></div>
+          </a>
+        </motion.div>
       </div>
     </section>
   );

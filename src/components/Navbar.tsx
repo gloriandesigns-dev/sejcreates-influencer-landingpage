@@ -30,7 +30,7 @@ const NavDropdown = ({ title, items }: { title: string, items: { label: string, 
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute top-full left-0 w-48 bg-white/90 backdrop-blur-xl border border-accentPink/10 rounded-xl shadow-2xl p-2 z-50"
+            className="absolute top-full left-0 w-64 bg-white/90 backdrop-blur-xl border border-accentPink/10 rounded-xl shadow-2xl p-2 z-50"
           >
             {items.map((item, idx) => (
               <button 
@@ -63,16 +63,10 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const workItems = [
-    { label: "B2B", targetId: "experience-section" },
-    { label: "D2C", targetId: "featured-reels-section" },
-    { label: "Content Creation", targetId: "reels-ticker-section" }
-  ];
-
-  const contactItems = [
-    { label: "B2B", targetId: "cta-section" },
-    { label: "D2C", targetId: "cta-section" },
-    { label: "Content Creation", targetId: "cta-section" }
+  const commonItems = [
+    { label: "Business Consultations", targetId: "experience-section" },
+    { label: "Factory Collaboration", targetId: "featured-reels-section" },
+    { label: "Content Collaboration", targetId: "reels-ticker-section" }
   ];
 
   const scrollToSection = (id: string) => {
@@ -107,8 +101,8 @@ const Navbar = () => {
               className="fixed top-0 left-0 h-full w-[80%] max-w-sm bg-white/95 backdrop-blur-2xl z-[110] lg:hidden p-8 flex flex-col shadow-2xl"
             >
               <div className="flex justify-between items-center mb-12">
-                <div className="w-10 h-10 rounded-full bg-accentLime flex items-center justify-center">
-                  <span className="font-display font-bold text-xs">S.</span>
+                <div className="px-4 h-10 rounded-full bg-accentLime flex items-center justify-center shadow-sm">
+                  <span className="font-display font-bold text-xs uppercase tracking-widest leading-none">Sejal</span>
                 </div>
                 <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 hover:bg-black/5 rounded-full transition-colors">
                   <X size={24} />
@@ -134,8 +128,8 @@ const Navbar = () => {
                         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden pl-4 mt-4 flex flex-col gap-4 border-l border-accentPink/10"
                       >
-                        {workItems.map(item => (
-                          <button key={item.label} onClick={() => scrollToSection(item.targetId)} className="text-left text-lg tracking-widest text-textMuted uppercase font-bold">{item.label}</button>
+                        {commonItems.map(item => (
+                          <button key={item.label} onClick={() => scrollToSection(item.targetId)} className="text-left text-sm tracking-widest text-textMuted uppercase font-bold">{item.label}</button>
                         ))}
                       </motion.div>
                     )}
@@ -161,8 +155,8 @@ const Navbar = () => {
                         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden pl-4 mt-4 flex flex-col gap-4 border-l border-accentPink/10"
                       >
-                        {contactItems.map(item => (
-                          <button key={item.label} onClick={() => scrollToSection(item.targetId)} className="text-left text-lg tracking-widest text-textMuted uppercase font-bold">{item.label}</button>
+                        {commonItems.map(item => (
+                          <button key={item.label} onClick={() => scrollToSection(item.targetId)} className="text-left text-sm tracking-widest text-textMuted uppercase font-bold">{item.label}</button>
                         ))}
                       </motion.div>
                     )}
@@ -210,10 +204,10 @@ const Navbar = () => {
 
           <div className="hidden lg:flex gap-10 items-center text-[10px] tracking-[0.15em] text-textMuted font-bold uppercase">
             <button onClick={() => scrollToSection('about-section')} className="hover:text-accentPink relative group transition-colors duration-700 uppercase">About</button>
-            <NavDropdown title="Work" items={workItems} />
+            <NavDropdown title="Work" items={commonItems} />
             <button onClick={() => scrollToSection('reels-ticker-section')} className="hover:text-accentPink relative group transition-colors duration-700 uppercase">Insights</button>
             <button onClick={() => scrollToSection('recognition-section')} className="hover:text-accentPink relative group transition-colors duration-700 uppercase">Recognition</button>
-            <NavDropdown title="Contact" items={contactItems} />
+            <NavDropdown title="Contact" items={commonItems} />
           </div>
 
           <div className="hidden lg:block text-[10px] tracking-[0.15em] text-textMuted font-bold uppercase">
@@ -225,8 +219,8 @@ const Navbar = () => {
             </a>
           </div>
           
-          <div className="lg:hidden w-10 h-10 rounded-full bg-accentLime flex items-center justify-center shadow-sm">
-            <span className="font-display font-bold text-xs">S.</span>
+          <div className="lg:flex px-4 h-10 rounded-full bg-accentLime flex items-center justify-center shadow-sm">
+            <span className="font-display font-bold text-xs uppercase tracking-widest leading-none">Sejal</span>
           </div>
         </div>
       </motion.nav>

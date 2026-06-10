@@ -24,7 +24,7 @@ const About = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % visuals.length);
-    }, 6000);
+    }, 2500); // 2.5s delay
     return () => clearInterval(timer);
   }, []);
 
@@ -40,7 +40,7 @@ const About = () => {
             transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-4 flex flex-col justify-center"
           >
-            <h2 className="text-3xl md:text-4xl font-display mb-6 text-textMain tracking-tight">About Me</h2>
+            <h2 className="text-3xl md:text-4xl font-display mb-6 text-textMain tracking-tight uppercase">About Me</h2>
             <p className="text-textMuted leading-relaxed font-light text-base md:text-lg">
               Strategy by day. Stories always. I'm a London Business School graduate and digital strategist who creates content around D2C brands, consumer psychology, AI, and internet culture.
             </p>
@@ -62,7 +62,8 @@ const About = () => {
               <img 
                 src="https://images.dualite.app/4befb7e4-f16f-4dbc-8edf-a229d8b20017/Screenshot_2026-06-09_at_8.55.27_PM-97c75dd6-4c0e-435c-bcfc-836791d319ef.webp" 
                 alt="Sejal" 
-                loading="lazy"
+                fetchPriority="high"
+                loading="eager"
                 decoding="async"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[2000ms] ease-cinematic"
               />
@@ -121,7 +122,7 @@ const About = () => {
               {item.type === 'video' ? (
                 <video src={item.src} autoPlay loop muted playsInline preload="metadata" className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-[2000ms] ease-cinematic" />
               ) : (
-                <img src={item.src} alt="Visual" loading="lazy" decoding="async" className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-[2000ms] ease-cinematic" />
+                <img src={item.src} alt="Visual" fetchPriority="high" loading="eager" decoding="async" className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-[2000ms] ease-cinematic" />
               )}
             </motion.div>
           ))}
@@ -131,16 +132,16 @@ const About = () => {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
               className="absolute inset-0 shadow-xl"
             >
               {visuals[activeIndex].type === 'video' ? (
                 <video src={visuals[activeIndex].src} autoPlay loop muted playsInline preload="metadata" className="w-full h-full object-cover" />
               ) : (
-                <img src={visuals[activeIndex].src} alt="Visual" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                <img src={visuals[activeIndex].src} alt="Visual" fetchPriority="high" loading="eager" decoding="async" className="w-full h-full object-cover" />
               )}
             </motion.div>
           </AnimatePresence>
